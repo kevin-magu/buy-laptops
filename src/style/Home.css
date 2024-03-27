@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+
+}
+
+.navbar{
+    background-color: black;
+    font-size: 17px;
+    font-weight: bold;
+    color: white;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.navbar ul {
+    display: flex;
+    justify-content: center;
+}
+.navbar ul li{
+    margin-right: 90px;
+    list-style: none;
+}
+
+.hero-section{
+    height: auto;
+    width: 100%;
+}
+
+.mac-div{
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+.hero-section  p{
+    font-family: "Audiowide", sans-serif;
+    justify-content: center;
+    display: flex;
+    font-size: 50px;
+    margin-top: -48px;
+}
+.button-div{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.button-div button{
+    padding: 10px;
+    border-radius: none;
+    border: 1px black solid;
+    cursor: pointer;
+    background-color: white;
+}
+.button-div button:hover{
+    background-color: black;
+    color: white;
+}
+.input-div{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.input-div input{
+    height: 36px;
+    width: 290px;
+    border: 1px black;
+    background-color: rgb(29, 31, 29);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+.input-div input::placeholder{
+    margin-left: 150px;
+}
+
+.input-div button{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: black;
+    color: white;
+    padding: 9px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
