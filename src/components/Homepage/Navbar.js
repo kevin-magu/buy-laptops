@@ -15,6 +15,7 @@ function Navbar(){
                 <li>About <BsInfoCircle  className="navicons" /> </li>
                 <li className="cart">Cart <FaShoppingCart className="navicons cart" /> </li>
                 <li>Account <MdAccountCircle className="navicons" /> </li>
+               <Link to="/upload"><li>Upload</li></Link>
 
             </ul>
         </div>

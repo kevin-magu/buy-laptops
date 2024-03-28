@@ -1,0 +1,54 @@
+.formpage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    margin-bottom: 350px;
+}
+form{
+    display: flex;
+    
+}
+form textarea{
+    border-radius: 5px;
+}
+form input,textarea{
+    width: 400px;
+    margin-top: 10px;
+    color: white;
+    background-color: rgb(29, 31, 29);
+    padding: 3px;
+}
+form input{
+    height: 25px;
+    border: 1px black solid;
+}
+
+.leftside{
+    display: flex;
+    flex-direction: column;
+}
+.rightside{
+    border-radius: 5px;
+    height: 320px;
+    width: 400px;
+    background-color: rgb(29, 31, 29);
+    margin-left: 20px;
+    margin-top: 10px;
+}
+form button{
+    margin-top: 20px;
+    cursor: pointer;
+    padding: 5px;
+    background-color: black;
+    color: white;
+    border: 1px black;
+    height: 29px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+form button:hover{
+    background-color: rgb(252, 252, 252);
+    color: rgb(0, 0, 0);
+    border: 1px black solid;
+}
