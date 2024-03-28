@@ -1,13 +1,19 @@
+.formpage-title{
+    font-family: "Audiowide", sans-serif;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
 .formpage{
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 100px;
     margin-bottom: 350px;
+    flex-direction: column;
 }
 form{
-    display: flex;
-    
+    display: flex; 
 }
 form textarea{
     border-radius: 5px;
@@ -29,13 +35,44 @@ form input{
     flex-direction: column;
 }
 .rightside{
+    position: relative;
     border-radius: 5px;
     height: 320px;
-    width: 400px;
+    width: 430px;
     background-color: rgb(29, 31, 29);
     margin-left: 20px;
     margin-top: 10px;
 }
+
+.rightside::after{
+    position: absolute;
+    content: '';
+    width: 2px;
+    height: 300px;
+    background-color: white;
+    left: 20px;
+    top: 8px;
+    border-radius: 3px;
+}
+.rightside p{
+    color: white;
+    margin-left: 36px;
+    margin-top: 40px;
+    position: relative;
+}
+.rightside p::after{
+    position: absolute;
+    content: '';
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: white;
+    left: -25px;
+}
+.rightside-p3::after{
+    margin-top: -55px;
+}
+
 form button{
     margin-top: 20px;
     cursor: pointer;
