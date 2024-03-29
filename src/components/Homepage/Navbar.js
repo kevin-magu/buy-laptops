@@ -30,7 +30,7 @@ function Navbar(){
                 <Link className="link" to="/store"><li>Laptops <FaLaptop className="navicons" /> </li></Link>
                 <li>About<BsInfoCircle  className="navicons" /> </li>
                 <li className="cart">Cart <FaShoppingCart className="navicons cart" /> </li>
-                <li>{user ? "Account": "Login"}  <MdAccountCircle className="navicons" /> </li>
+               <Link className="link" to={user ? "/account" : "/login"} ><li>{user ? "Account": "Login"}  <MdAccountCircle className="navicons" /> </li></Link> 
                <Link to="/upload"><li>Upload</li></Link>
 
             </ul>

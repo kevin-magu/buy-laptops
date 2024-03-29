@@ -4,10 +4,12 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Upload from './pages/Upload';
+import Store from './pages/Store';
+import Login from './pages/Login';
 
 import Navbar from './components/Homepage/Navbar';
 import Footer from './components/Homepage/Footer';
-import Store from './pages/Store';
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route exact path="/store" element={<Store/>} />
         <Route exact path="/upload" element ={<Upload />} />
+        <Route exact path="/login" element={<Login />} />
       </Routes>
       <Footer/>
     </Router>

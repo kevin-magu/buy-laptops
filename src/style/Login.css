@@ -1,0 +1,20 @@
+.loginform{
+    min-height: 600px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+form{
+    margin-top: -150px;
+    display: flex;
+    flex-direction: column;
+}
+form p{
+    font-family: "Audiowide", sans-serif;
+}
+form input{
+    padding: 7px;
+    margin-top: 10px;
+}
