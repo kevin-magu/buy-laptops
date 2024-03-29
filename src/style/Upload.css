@@ -12,7 +12,7 @@
     margin-bottom: 350px;
     flex-direction: column;
 }
-form{
+.formpage form{
     display: flex; 
 }
 form textarea{
@@ -55,10 +55,12 @@ form input{
     border-radius: 3px;
 }
 .rightside p{
+    font-size: 15px;
     color: white;
     margin-left: 36px;
-    margin-top: 40px;
+    margin-top: 14px;
     position: relative;
+    line-height: 23px;
 }
 .rightside p::after{
     position: absolute;

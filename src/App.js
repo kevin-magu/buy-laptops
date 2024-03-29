@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Upload from './pages/Upload';
 import Store from './pages/Store';
 import Login from './pages/Login';
+import Register from './pages/Register';
 
 import Navbar from './components/Homepage/Navbar';
 import Footer from './components/Homepage/Footer';
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/store" element={<Store/>} />
         <Route exact path="/upload" element ={<Upload />} />
         <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={ <Register />} />
       </Routes>
       <Footer/>
     </Router>

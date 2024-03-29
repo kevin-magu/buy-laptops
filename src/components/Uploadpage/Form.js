@@ -26,6 +26,7 @@ function Form() {
                       Operating system,
                       Battery life,
                       Ports (USB, HDMI, etc.))</p>
+          <p className='rightside-p5'>Select a laptop image to upload from your device</p>
           <p className='rightside-p4'>Click upload button</p>
           
         </div>

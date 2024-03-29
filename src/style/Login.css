@@ -6,15 +6,34 @@
     flex-direction: column;
 }
 
-form{
+.loginform form{
     margin-top: -150px;
     display: flex;
     flex-direction: column;
 }
 form p{
     font-family: "Audiowide", sans-serif;
+    font-size: 20px;
 }
 form input{
     padding: 7px;
     margin-top: 10px;
+}
+.google-paragraph{
+    margin-top: 20px;
+    align-items: center;
+    display: flex;
+}
+.google-logo{
+    transform: scale(1.4);
+    margin-right: 10px;
+    color: rgb(202, 85, 241);
+}
+.register-paragraph{
+    margin-top: 20px;
+    font-size: 15px;
+}
+.linkto{
+    color: rgb(202, 85, 241);
+    text-decoration: none;
 }
