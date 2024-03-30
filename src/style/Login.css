@@ -23,6 +23,7 @@ form input{
     margin-top: 20px;
     align-items: center;
     display: flex;
+    cursor: pointer;
 }
 .google-logo{
     transform: scale(1.4);
@@ -37,11 +38,7 @@ form input{
     color: rgb(202, 85, 241);
     text-decoration: none;
 }
-.error-status{
-    width: 100%;
-    position: absolute;
-    top: 260px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.error-message{
+    color: red;
+    font-family: sans-serif;
 }
