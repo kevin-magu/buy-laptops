@@ -74,6 +74,9 @@ form input{
 .rightside-p3::after{
     margin-top: -55px;
 }
+.rightside-p5::after{
+    margin-top: -23px;
+}
 
 form button{
     margin-top: 20px;

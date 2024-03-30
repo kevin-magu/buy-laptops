@@ -13,7 +13,7 @@
 }
 form p{
     font-family: "Audiowide", sans-serif;
-    font-size: 20px;
+    font-size: 18px;
 }
 form input{
     padding: 7px;
@@ -36,4 +36,12 @@ form input{
 .linkto{
     color: rgb(202, 85, 241);
     text-decoration: none;
+}
+.error-status{
+    width: 100%;
+    position: absolute;
+    top: 260px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
