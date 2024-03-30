@@ -29,9 +29,6 @@ const handleRegister = async (e)=>{
   e.preventDefault();
 
   try{
-    if(password.length<3){
-      throw new Error('password should be > 3 characters')
-    }
     setIsLoading(true);
     await createUserWithEmailAndPassword(auth, email,password);
     navigate('/login');
@@ -41,7 +38,10 @@ const handleRegister = async (e)=>{
       setErrorMessage('Email is already in use!')
     }else if(error.code==='auth/network-request-failed'){
       setErrorMessage('Network connection error');
-    }else{
+    }else if(password.length< 5){
+      setErrorMessage('password characters should be > 5')
+    }
+    else{
       setErrorMessage('An error occured. please try again.')
     }
   }
@@ -55,7 +55,7 @@ const handleSignInWithGoogle = async () =>{
     await signInWithPopup(auth, provider);
     navigate('/store?status=signin=success')
   }catch(error){
-    setErrorMessage(error)
+    setErrorMessage("An error occured")
   }
 }
 
@@ -68,6 +68,7 @@ const handleSignInWithGoogle = async () =>{
         <input type="text" placeholder="enter your email" value={email} onChange={(e)=> setEmail(e.target.value)} required/>
         <input type="password" placeholder="enter your password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
         <button disabled={isLoading}>{isLoading? 'Registering user...': 'REGISTER'}</button>
+
         <p className="google-paragraph" onClick={handleSignInWithGoogle}><BsGoogle className="google-logo"/> Signin With google</p>
         <p className="register-paragraph">Already have an account? <Link className="linkto" to="/login">Login here</Link></p>
     </form>
