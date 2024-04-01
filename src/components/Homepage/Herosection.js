@@ -6,7 +6,7 @@ function Herosection(){
     return(
         <div className="hero-section">
             <div className="mac-div"><img src={Macbook} alt="" className="mac" /></div>
-            <p>Top Tech. Unbeatable Deals.</p>
+            <p>Top Tech. Unbeatable Deals!</p>
             
                 <Link to="/store" className="button-div" >
                     <button>View Laptop Store</button>
