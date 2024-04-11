@@ -72,10 +72,13 @@ form input{
     left: -25px;
 }
 .rightside-p3::after{
-    margin-top: -55px;
+    margin-top: px;
 }
 .rightside-p5::after{
     margin-top: -23px;
+}
+.rightside-p2::after{
+    margin-top: 2px;
 }
 
 form button{
