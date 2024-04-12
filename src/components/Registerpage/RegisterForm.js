@@ -75,6 +75,7 @@ const handleSignInWithGoogle = async () =>{
 
 </div>
   )
+console.log(auth)
 }
 
 export default RegisterForm
