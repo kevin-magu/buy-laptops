@@ -6,6 +6,7 @@ import { auth } from "../../Firebaseconfig";
 
 function Form() {
   const [img, setImg] = useState('');
+  const [img2, setImg2] = useState('')
   const [error, setStatus] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [userEmail, setUserEmail] = useState(null); // State for user email
@@ -31,16 +32,20 @@ function Form() {
   const handleImgSubmit = async (e) => {
     e.preventDefault();
 
-    if (!img) {
+    if (!img || !img2) {
       setStatus("Please insert an image");
       return;
     }
 
     try {
+      const productID = v4();
       setIsUploading(true);
-      const imgRef = ref(storage, `${userEmail}/${v4()}`);
-      
+      const imgRef = ref(storage, `laptop-images/${userEmail}/${productID}-1`);
       await uploadBytes(imgRef, img);
+
+      const imgRef2 = ref(storage, `laptop-images/${userEmail}/${productID}-2`);
+      await uploadBytes(imgRef2, img2)
+
       setStatus("Image upload successful");
     } catch (error) {
       setIsUploading(false);
@@ -69,6 +74,7 @@ function Form() {
             placeholder='Enter the laptop description'
           ></textarea>
           <input type='file' onChange={(e) => setImg(e.target.files[0])}/>
+          <input type='file' onChange={(e) => setImg2(e.target.files[0])}/>
           <button type='button' onClick={handleImgSubmit}>{isUploading ? 'Uploading' : 'Upload'}</button>
         </div>
 
