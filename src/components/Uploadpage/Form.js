@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"; // Added useEffect import
-import { storage,auth, } from "../../Firebaseconfig";
+import { storage,auth, db} from "../../Firebaseconfig";
 import { ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 import { collection, addDoc } from "firebase/firestore";
@@ -11,6 +11,7 @@ function Form() {
   const [img2, setImg2] = useState('');
   const [laptopName, setLaptopName] = useState('');
   const [laptopPrice, setLaptopPrice] = useState('');
+  const [laptopDescription, setLaptopDescription] = useState('');
   const [error, setStatus] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [userEmail, setUserEmail] = useState(null); // State for user email
@@ -33,9 +34,12 @@ function Form() {
     return () => unsubscribe();
   }, []); // Empty dependency array ensures effect runs only once after initial render
 
+//database reference 
+const laptopDetailsDb = collection(db, `laptop_details`)
  // function to submit laptop details 
   const handleImgSubmit = async (e) => {
     e.preventDefault();
+
 
     if (!img || !img2) {
       setStatus("Please insert an image");
@@ -43,8 +47,15 @@ function Form() {
     }
 
     try {
-      const productID = v4();
       setIsUploading(true);
+
+      await addDoc(laptopDetailsDb,{
+        email: userEmail,
+        laptop_description: laptopDescription,
+        laptop_name: laptopName,
+        laptop_price: laptopPrice,
+      })
+      const productID = v4();
       const imgRef = ref(storage, `laptop-images/${userEmail}/${productID}-1`);
       await uploadBytes(imgRef, img);
 
@@ -68,15 +79,18 @@ function Form() {
           <input
             type='text'
             placeholder='laptop name'
+            value={laptopName} onChange={(e)=> setLaptopName(e.target.value)}
           />
           <input
             type='text'
             placeholder='laptop price'
+            value={laptopPrice} onChange={(e) => setLaptopPrice(e.target.value)}
           />
           <textarea
             cols='30'
             rows='10'
             placeholder='Enter important laptop specifications like RAM, HDD/SSD size e.t.c'
+            value={laptopDescription} onChange={(e) => setLaptopDescription(e.target.value)}
           ></textarea>
           <input type='file' onChange={(e) => setImg(e.target.files[0])}/>
           <input type='file' onChange={(e) => setImg2(e.target.files[0])}/>
