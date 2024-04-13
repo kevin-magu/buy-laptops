@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react"; // Added useEffect import
-import { storage } from "../../Firebaseconfig";
+import { storage,auth, } from "../../Firebaseconfig";
 import { ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
-import { auth } from "../../Firebaseconfig";
+import { collection, addDoc } from "firebase/firestore";
+
+
 
 function Form() {
   const [img, setImg] = useState('');
-  const [img2, setImg2] = useState('')
+  const [img2, setImg2] = useState('');
+  const [laptopName, setLaptopName] = useState('');
+  const [laptopPrice, setLaptopPrice] = useState('');
   const [error, setStatus] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [userEmail, setUserEmail] = useState(null); // State for user email
 
+  // get user email
   useEffect(() => {
-    // Subscribe to authentication state changes
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         // User is signed in
@@ -29,6 +33,7 @@ function Form() {
     return () => unsubscribe();
   }, []); // Empty dependency array ensures effect runs only once after initial render
 
+ // function to submit laptop details 
   const handleImgSubmit = async (e) => {
     e.preventDefault();
 
@@ -71,7 +76,7 @@ function Form() {
           <textarea
             cols='30'
             rows='10'
-            placeholder='Enter the laptop description'
+            placeholder='Enter important laptop specifications like RAM, HDD/SSD size e.t.c'
           ></textarea>
           <input type='file' onChange={(e) => setImg(e.target.files[0])}/>
           <input type='file' onChange={(e) => setImg2(e.target.files[0])}/>
