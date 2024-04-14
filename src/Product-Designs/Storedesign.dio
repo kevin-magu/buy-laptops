@@ -1,0 +1,43 @@
+<mxfile host="65bd71144e">
+    <diagram id="x58EBcbyUYkNpFSWLoJ2" name="Page-1">
+        <mxGraphModel dx="880" dy="586" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+                    <mxGeometry x="50" y="110" width="520" height="520" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" style="edgeStyle=none;html=1;" edge="1" parent="1" source="5" target="2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Pictures" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="50" y="110" width="520" height="270" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="" style="triangle;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="540" y="220" width="20" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="" style="triangle;whiteSpace=wrap;html=1;rotation=-180;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="220" width="20" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="RAM" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="428" width="60" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="STORAGE" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="458" width="60" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="CPU" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="488" width="60" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="LAPTOP TITLE" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="394" width="120" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="SCREEN SIZE" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="520" width="100" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="READ MORE" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="270" y="592" width="80" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
