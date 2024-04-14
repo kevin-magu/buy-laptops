@@ -48,21 +48,23 @@ const laptopDetailsDb = collection(db, `laptop_details`)
 
     try {
       setIsUploading(true);
-
+      const productID = v4();
       await addDoc(laptopDetailsDb,{
+        product_id: productID,
         email: userEmail,
         laptop_description: laptopDescription,
         laptop_name: laptopName,
         laptop_price: laptopPrice,
       })
-      const productID = v4();
+      
       const imgRef = ref(storage, `laptop-images/${userEmail}/${productID}-1`);
       await uploadBytes(imgRef, img);
 
       const imgRef2 = ref(storage, `laptop-images/${userEmail}/${productID}-2`);
       await uploadBytes(imgRef2, img2)
 
-      setStatus("Image upload successful");
+      setStatus("Details uploaded succesifully");
+      setIsUploading(false);
     } catch (error) {
       setIsUploading(false);
       console.error(error);
