@@ -1,6 +1,11 @@
+import '../style/Store.css'
+import Search from '../components/Storepage/Search'
+
 function Store(){
     return(
-        <div></div>
+        <div className='store-container'>
+            <Search />
+        </div>
     )
 }
 
