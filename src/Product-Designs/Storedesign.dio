@@ -1,11 +1,11 @@
 <mxfile host="65bd71144e">
     <diagram id="x58EBcbyUYkNpFSWLoJ2" name="Page-1">
-        <mxGraphModel dx="880" dy="586" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1066" dy="586" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="26" value="" style="group" vertex="1" connectable="0" parent="1">
-                    <mxGeometry x="230" y="400" width="410" height="410" as="geometry"/>
+                <mxCell id="26" value="" style="group" parent="1" vertex="1" connectable="0">
+                    <mxGeometry x="220" y="110" width="410" height="410" as="geometry"/>
                 </mxCell>
                 <mxCell id="2" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="26" vertex="1">
                     <mxGeometry width="410" height="410" as="geometry"/>
@@ -26,42 +26,42 @@
                     <mxGeometry x="13.928571428571429" y="215.89285714285714" width="41.785714285714285" height="13.928571428571429" as="geometry"/>
                 </mxCell>
                 <mxCell id="10" value="STORAGE" style="rounded=0;whiteSpace=wrap;html=1;" parent="26" vertex="1">
-                    <mxGeometry x="13.928571428571429" y="236.78571428571433" width="48.75" height="13.928571428571429" as="geometry"/>
+                    <mxGeometry x="13.93" y="238.79" width="66.07" height="13.93" as="geometry"/>
                 </mxCell>
                 <mxCell id="11" value="CPU" style="rounded=0;whiteSpace=wrap;html=1;" parent="26" vertex="1">
-                    <mxGeometry x="13.928571428571429" y="257.67857142857144" width="41.785714285714285" height="13.928571428571429" as="geometry"/>
+                    <mxGeometry x="13.928571428571429" y="262.67857142857144" width="41.785714285714285" height="13.928571428571429" as="geometry"/>
                 </mxCell>
-                <mxCell id="32" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontColor=#000000;" edge="1" parent="26" source="12" target="5">
+                <mxCell id="32" style="edgeStyle=none;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontColor=#000000;" parent="26" source="12" target="5" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="12" value="LAPTOP TITLE" style="rounded=0;whiteSpace=wrap;html=1;" parent="26" vertex="1">
                     <mxGeometry width="410" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="13" value="SCREEN SIZE" style="rounded=0;whiteSpace=wrap;html=1;" parent="26" vertex="1">
-                    <mxGeometry x="13.928571428571429" y="279.9642857142857" width="69.64285714285714" height="20.892857142857146" as="geometry"/>
+                    <mxGeometry x="12.93" y="286.96" width="96.07" height="20.89" as="geometry"/>
                 </mxCell>
-                <mxCell id="20" value="Description" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="26">
+                <mxCell id="20" value="Description" style="rounded=0;whiteSpace=wrap;html=1;" parent="26" vertex="1">
                     <mxGeometry x="167.14285714285714" y="215.89285714285714" width="215.89285714285714" height="90.53571428571429" as="geometry"/>
                 </mxCell>
-                <mxCell id="22" value="PHONE" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="26">
+                <mxCell id="22" value="PHONE" style="rounded=0;whiteSpace=wrap;html=1;" parent="26" vertex="1">
                     <mxGeometry x="167.14285714285714" y="313.39285714285717" width="83.57142857142857" height="13.928571428571429" as="geometry"/>
                 </mxCell>
-                <mxCell id="23" value="EMAIL" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="26">
+                <mxCell id="23" value="EMAIL" style="rounded=0;whiteSpace=wrap;html=1;" parent="26" vertex="1">
                     <mxGeometry x="167.14285714285714" y="334.28571428571433" width="83.57142857142857" height="13.928571428571429" as="geometry"/>
                 </mxCell>
-                <mxCell id="25" value="VIEW PRODUCT" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="26">
+                <mxCell id="25" value="VIEW PRODUCT" style="rounded=0;whiteSpace=wrap;html=1;" parent="26" vertex="1">
                     <mxGeometry x="167.14" y="369.11" width="112.86" height="20.89" as="geometry"/>
                 </mxCell>
-                <mxCell id="31" value="" style="group" vertex="1" connectable="0" parent="1">
+                <mxCell id="31" value="" style="group" parent="1" vertex="1" connectable="0">
                     <mxGeometry x="130" y="30" width="590" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="28" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="31">
+                <mxCell id="28" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="31" vertex="1">
                     <mxGeometry width="390" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="29" value="FILTER BY" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="31">
+                <mxCell id="29" value="FILTER BY" style="rounded=1;whiteSpace=wrap;html=1;" parent="31" vertex="1">
                     <mxGeometry x="400" width="90" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="30" value="SEARCH" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE76F1;fontColor=#000000;fontStyle=1" vertex="1" parent="31">
+                <mxCell id="30" value="SEARCH" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE76F1;fontColor=#000000;fontStyle=1" parent="31" vertex="1">
                     <mxGeometry x="500" width="90" height="30" as="geometry"/>
                 </mxCell>
             </root>

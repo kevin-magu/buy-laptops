@@ -19,3 +19,9 @@
     font-weight: bold;
     border-radius: 5px;
 }
+.filter{
+    margin-left: 20px;
+    border: 1px black solid;
+    outline: none;
+}
+
