@@ -5,11 +5,11 @@ function Search() {
     <div className='search-container'>
         <input type="search" /> 
         <select className="filter">
-          <option value="" disabled selected>Filter by:</option>
-          <option value="Lenovo" key="">Lenovo</option>
-          <option value="HP" key="">HP</option>
-          <option value="Mac" key="">Mac</option>
-          <option value="Microsoft" key="">Microsoft</option>
+          <option value="" disabled defaultValue="Filter by:"></option>
+          <option value="Lenovo" >Lenovo</option>
+          <option value="HP" >HP</option>
+          <option value="Mac" >Mac</option>
+          <option value="Microsoft">Microsoft</option>
         </select>
         <button>Search</button>
     </div>

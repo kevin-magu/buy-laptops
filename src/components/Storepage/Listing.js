@@ -1,51 +1,50 @@
-import React, {useState, useEffect} from 'react'
-import { storage,db } from '../../Firebaseconfig'
-import { ref,listAll,getDownloadURL } from 'firebase/storage'
+import React, { useState, useEffect } from 'react';
+import { storage } from '../../Firebaseconfig';
+import { ref, listAll, getDownloadURL } from 'firebase/storage';
 
 function Listing() {
     const [images, setImages] = useState([]);
-    const [currentImageIndex, setCurrentImageIndex] = useState([0])
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
     useEffect(() => {
         const fetchUserListings = async () => {
-            try{
-                //fetch listings from my collection
-                const querySnapshot = await db.collection("laptop-images").get();
-                const productIDs = querySnapshot.docs.map((doc) =>doc.id)
-           
-                //fetch images for each procuct 
-                const imageUrls = []
-                for(const productId of productIDs){
-                    const imageRefs = await listAll(ref(storage, `laptop-images/${productId}`));
-                    const downloadUrls = await Promise.all(imageRefs.items.map((item) => getDownloadURL(item)))
-                    imageUrls.push(...downloadUrls);
-                }   
+            try {
+                // Fetch listings from the storage
+                const listRef = ref(storage, 'laptop-images');
+                const listResult = await listAll(listRef);
+
+                // Fetch images for each product
+                const imageUrls = [];
+                for (const item of listResult.items) {
+                    const downloadUrl = await getDownloadURL(item);
+                    imageUrls.push(downloadUrl);
+                }
                 setImages(imageUrls);
-            }catch(error){
-                console.error("error fetching listings", error)
+            } catch (error) {
+                console.error("Error fetching listings", error);
             }
         }
         fetchUserListings();
-
     }, []);
 
- const handlePrevImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex===0? images.length-1:prevIndex-1))
- }
- 
- const handleNextImage = () =>{
-    setCurrentImageIndex((prevIndex) =>(prevIndex===images.length-1?0:prevIndex +1))
- }
-  return (
-    <div className='listing-container'>
-        <div className="card">
-            <div className="card-title"></div>
-            <button>previous</button>
-            <div className="card-image" style={{backgroundImage: `url(${images[currentImageIndex]})`}}></div>
-            <button>next</button>
+    const handlePrevImage = () => {
+        setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
+    }
+
+    const handleNextImage = () => {
+        setCurrentImageIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+    }
+
+    return (
+        <div className='listing-container'>
+            <div className="card">
+                <div className="card-title"></div>
+                <button onClick={handlePrevImage}>Previous</button>
+                <div className="card-image" style={{ backgroundImage: `url(${images[currentImageIndex]})` }}></div>
+                <button onClick={handleNextImage}>Next</button>
+            </div>
         </div>
-    </div>
-  )
+    );
 }
 
-export default Listing
+export default Listing;
