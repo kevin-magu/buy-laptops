@@ -3,48 +3,32 @@ import { storage } from '../../Firebaseconfig';
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
 
 function Listing() {
-    const [images, setImages] = useState([]);
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [cards, setCards] = useState([]);
 
-    useEffect(() => {
-        const fetchUserListings = async () => {
-            try {
-                // Fetch listings from the storage
-                const listRef = ref(storage, 'laptop-images');
-                const listResult = await listAll(listRef);
-
-                // Fetch images for each product
-                const imageUrls = [];
-                for (const item of listResult.items) {
-                    const downloadUrl = await getDownloadURL(item);
-                    imageUrls.push(downloadUrl);
-                }
-                setImages(imageUrls);
-            } catch (error) {
-                console.error("Error fetching listings", error);
-            }
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const paths = []
+        const storageRef  = ref(storage, 'laptop-images/')
+        const items = listAll(storageRef);
+        console.log(items )
+        for (const item in storageRef){
+            paths.push(item)
         }
-        fetchUserListings();
-    }, []);
 
-    const handlePrevImage = () => {
-        setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
-    }
+      } catch (error) {
+        console.error("Error fetching images:", error);
+      }
+    };
 
-    const handleNextImage = () => {
-        setCurrentImageIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
-    }
+    fetchImages();
+  }, []);
 
-    return (
-        <div className='listing-container'>
-            <div className="card">
-                <div className="card-title"></div>
-                <button onClick={handlePrevImage}>Previous</button>
-                <div className="card-image" style={images.length > 0 ? { backgroundImage: `url(${images[currentImageIndex]})` } : {} }></div>
-                <button onClick={handleNextImage}>Next</button>
-            </div>
-        </div>
-    );
+  return (
+    <div className='listing-container'>
+      
+    </div>
+  );
 }
 
 export default Listing;
