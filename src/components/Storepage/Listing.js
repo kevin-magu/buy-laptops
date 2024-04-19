@@ -40,7 +40,7 @@ function Listing() {
             <div className="card">
                 <div className="card-title"></div>
                 <button onClick={handlePrevImage}>Previous</button>
-                <div className="card-image" style={{ backgroundImage: `url(${images[currentImageIndex]})` }}></div>
+                <div className="card-image" style={images.length > 0 ? { backgroundImage: `url(${images[currentImageIndex]})` } : {} }></div>
                 <button onClick={handleNextImage}>Next</button>
             </div>
         </div>
