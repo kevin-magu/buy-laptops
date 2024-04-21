@@ -11,10 +11,14 @@ function Listing() {
         const paths = []
         const storageRef  = ref(storage, 'laptop-images/')
         const items = listAll(storageRef);
-        console.log(items )
-        for (const item in storageRef){
-            paths.push(item)
-        }
+        let itemsLength = ((await items).prefixes.length)
+        console.log(itemsLength)
+        
+        paths.push((await items).prefixes[0].name)
+        //const items2 = (await items).prefixes[0].name
+       
+        console.log("this is a path", paths)
+       
 
       } catch (error) {
         console.error("Error fetching images:", error);
