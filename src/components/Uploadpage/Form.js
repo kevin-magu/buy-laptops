@@ -57,7 +57,7 @@ const laptopDetailsDb = collection(db, `laptop_details`)
         laptop_price: laptopPrice,
       })
       
-      const imgRef = ref(storage, `laptop-images/${userEmail}/${productID}-1`);
+      const imgRef = ref(storage, `laptop-images/${userEmail}/${productID}`);
       await uploadBytes(imgRef, img);
 
       const imgRef2 = ref(storage, `laptop-images/${userEmail}/${productID}-2`);

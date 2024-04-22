@@ -43,7 +43,7 @@ function Listing() {
     <div className='listing-container'>
       {cards.map((card, index) => (
         <div key={index} className="card" style={{ backgroundImage: `url(${card.url})`, backgroundSize: 'cover', backgroundPosition: 'center', width: '200px', height: '200px' }}>
-          <p>{card.email}</p>
+          <p>{card.email}{card.name}</p>
         </div>
       ))}
     </div>
