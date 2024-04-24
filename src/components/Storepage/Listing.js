@@ -3,47 +3,59 @@ import { storage } from '../../Firebaseconfig';
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
 
 function Listing() {
-  const [cards, setCards] = useState([]);
+  const [products, setProducts] = useState({});
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
         const storageRef = ref(storage, 'laptop-images/');
-        const items = await listAll(storageRef);  // Get the list of directories once
-        console.log("Number of prefixes (directories):", items.prefixes.length);
+        const items = await listAll(storageRef);
 
-        const allImages = [];
+        const productImages = {};
 
-        // Loop through each directory (prefix)
+        // Organize images by product ID (assuming product ID is the first six characters of the filename)
         for (let prefix of items.prefixes) {
           const prefixRef = ref(storage, `laptop-images/${prefix.name}`);
           const emailContents = await listAll(prefixRef);
-
-          // Fetch all images from this directory
+          
           for (let item of emailContents.items) {
             const url = await getDownloadURL(item);
-            allImages.push({
-              name: item.name,
-              url: url,
-              email: prefix.name  // Assuming the prefix name is the email
-            });
+            const productId = item.name.substring(0, 6); // First six characters as product ID
+
+            if (!productImages[productId]) {
+              productImages[productId] = [];
+            }
+            productImages[productId].push(url);
           }
         }
 
-        setCards(allImages);  // Store all image data in state
+        setProducts(productImages);
       } catch (error) {
-        console.error("Error fetching images:", error);
+        console.error("An Error occured when fetching images:", error);
       }
     };
 
     fetchImages();
   }, []);
 
+  // Handler to change the current image index
+  const handleImageChange = (productId, direction) => {
+    setProducts(currentProducts => ({
+      ...currentProducts,
+      [productId]: {
+        ...currentProducts[productId],
+        currentIndex: (currentProducts[productId].currentIndex + direction + currentProducts[productId].images.length) % currentProducts[productId].images.length
+      }
+    }));
+  };
+
   return (
     <div className='listing-container'>
-      {cards.map((card, index) => (
-        <div key={index} className="card" style={{ backgroundImage: `url(${card.url})`, backgroundSize: 'cover', backgroundPosition: 'center', width: '200px', height: '200px' }}>
-          <p>{card.email}{card.name}</p>
+      {Object.entries(products).map(([productId, details]) => (
+        <div key={productId} className="card">
+          <div style={{ backgroundImage: `url(${details.images[details.currentIndex]})`, backgroundSize: 'cover', backgroundPosition: 'center', width: '200px', height: '200px' }}></div>
+          <button onClick={() => handleImageChange(productId, -1)}>Previous</button>
+          <button onClick={() => handleImageChange(productId, 1)}>Next</button>
         </div>
       ))}
     </div>
