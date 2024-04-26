@@ -45,10 +45,11 @@ function Navbar(){
                 <li className="cart">Cart <FaShoppingCart className="navicons cart" /> </li>
                <Link className="link" to={user ? "/account" : "/login"} ><li>{user ? "Account": "Login"}  <MdAccountCircle className="navicons" /> </li></Link> 
                <li style={{ display: user ? 'block' : 'none' }} onClick={handleLogout}>Logout <MdExitToApp className="navicons" /> </li>
-               <Link to="/upload"><li></li></Link>
+            
 
             </ul>
         </div>
     );
 }
+// <Link to="/upload"><li></li></Link> 
 export default Navbar

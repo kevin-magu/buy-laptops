@@ -24,12 +24,25 @@
     border: 1px black solid;
     outline: none;
 }
+.listing-container{
+    display: flex;
+    width: 100%;
+    
+}
 .card{
     width: 400px;
     height: 500px;
     background-color: gray;
+    display: flex;
+    flex-direction: row;
 }
 .card-image{
     width: 100%;
-    height: 40%;
+    height: 65%;
+    background-position: center;
+    background-size: cover;
+}
+.card button{
+    position: absolute;
+
 }

@@ -19,6 +19,8 @@
     display: flex;
     justify-content: center;
     text-decoration: none;
+    width: 100%;
+    overflow: hidden;
 }
 .link{
     text-decoration: none;

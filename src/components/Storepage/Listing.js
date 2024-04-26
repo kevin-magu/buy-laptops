@@ -17,15 +17,15 @@ function Listing() {
         for (let prefix of items.prefixes) {
           const prefixRef = ref(storage, `laptop-images/${prefix.name}`);
           const emailContents = await listAll(prefixRef);
-          
+
           for (let item of emailContents.items) {
             const url = await getDownloadURL(item);
             const productId = item.name.substring(0, 6); // First six characters as product ID
 
             if (!productImages[productId]) {
-              productImages[productId] = [];
+              productImages[productId] = { images: [], currentIndex: 0 };
             }
-            productImages[productId].push(url);
+            productImages[productId].images.push(url);
           }
         }
 
@@ -44,7 +44,7 @@ function Listing() {
       ...currentProducts,
       [productId]: {
         ...currentProducts[productId],
-        currentIndex: (currentProducts[productId].currentIndex + direction + currentProducts[productId].images.length) % currentProducts[productId].images.length
+        currentIndex: (currentProducts[productId].currentIndex + direction + currentProducts[productId].images.length) % currentProducts[productId].images.length === currentProducts[productId].images.length ? 0 : (currentProducts[productId].currentIndex + direction + currentProducts[productId].images.length) % currentProducts[productId].images.length
       }
     }));
   };
@@ -53,7 +53,7 @@ function Listing() {
     <div className='listing-container'>
       {Object.entries(products).map(([productId, details]) => (
         <div key={productId} className="card">
-          <div style={{ backgroundImage: `url(${details.images[details.currentIndex]})`, backgroundSize: 'cover', backgroundPosition: 'center', width: '200px', height: '200px' }}></div>
+          <div className="card-image" style={{ backgroundImage: `url(${details.images[details.currentIndex] || 'placeholder.jpg'})` }}></div>
           <button onClick={() => handleImageChange(productId, -1)}>Previous</button>
           <button onClick={() => handleImageChange(productId, 1)}>Next</button>
         </div>
