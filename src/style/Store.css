@@ -48,3 +48,14 @@
 .card button{
     position: absolute;
 }
+.previous-button{
+    right: -14px;
+    top: 26%;
+    transform: rotate(90deg);
+}
+.next-button{
+    left: -6px;
+    width: 60px;
+    top: 26%;
+    transform: rotate(90deg);
+}

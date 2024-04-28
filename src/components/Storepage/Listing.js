@@ -54,8 +54,8 @@ function Listing() {
       {Object.entries(products).map(([productId, details]) => (
         <div key={productId} className="card">
           <div className="card-image" style={{ backgroundImage: `url(${details.images[details.currentIndex] || 'placeholder.jpg'})` }}></div>
-          <button onClick={() => handleImageChange(productId, -1)}>p</button>
-          <button onClick={() => handleImageChange(productId, 1)}>N</button>
+          <button onClick={() => handleImageChange(productId, -1)} className='previous-button'>previous</button>
+          <button onClick={() => handleImageChange(productId, 1)} className='next-button'>Next</button>
         </div>
       ))}
     </div>
