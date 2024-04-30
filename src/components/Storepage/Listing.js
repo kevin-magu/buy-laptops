@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { storage } from '../../Firebaseconfig'; // Assuming Firebaseconfig imports storage
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
+import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 
 function Listing() {
   const [products, setProducts] = useState({});
@@ -90,6 +91,7 @@ function Listing() {
             <p className='product-description'>storage :</p>
             <p className='product-description'>Ram: </p>
             <p className='product-description'>Price:</p>
+            <p className='product-description'>Author:</p>
           </div>
         ))
       )}
