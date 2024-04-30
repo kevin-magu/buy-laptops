@@ -85,6 +85,11 @@ function Listing() {
             </div>
             <button onClick={() => handleImageChange(productId, -1)} className='previous-button'>Previous</button>
             <button onClick={() => handleImageChange(productId, 1)} className='next-button'>Next</button>
+
+            <p className='product-description'>Name: </p>
+            <p className='product-description'>storage :</p>
+            <p className='product-description'>Ram: </p>
+            <p className='product-description'>Price:</p>
           </div>
         ))
       )}
