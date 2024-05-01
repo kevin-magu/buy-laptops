@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { storage } from '../../Firebaseconfig'; // Assuming Firebaseconfig imports storage
+import { storage, db } from '../../Firebaseconfig'; // Assuming Firebaseconfig imports storage
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, deleteDoc, doc, query } from 'firebase/firestore';
 
 function Listing() {
   const [products, setProducts] = useState({});
   const [isLoading, setIsLoading] = useState(true); // Initial loading state
+  const [laptopDetails, setLaptopDetails] = useState([])
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -40,6 +41,28 @@ function Listing() {
     fetchImages();
   }, []); // Empty dependency array to fetch once
 
+  useEffect(() =>{
+    const fetchDescription = async () => {
+      try {
+        const Query = await getDocs(
+          collection(db, "laptop_details")
+        );
+        const queryData = Query.docs.map((doc) =>({
+          id: doc.id,
+          ...doc.data(),
+        }))
+        setLaptopDetails(queryData);
+      } catch (error) {
+        console.error("loading data from the database error",error)
+      }
+    }
+    fetchDescription();
+  }, [])
+
+  useEffect(() => {
+    console.log(laptopDetails);
+  }, [laptopDetails]);
+
   const handleImageChange = (productId, direction) => {
     try {
       setProducts(currentProducts => ({
@@ -49,6 +72,7 @@ function Listing() {
           currentIndex: (currentProducts[productId].currentIndex + direction + currentProducts[productId].images.length) % currentProducts[productId].images.length,
         }
       }));
+      
     } catch (error) {
       console.error("An Error occurred when updating image index:", error);
     }
@@ -86,12 +110,10 @@ function Listing() {
             </div>
             <button onClick={() => handleImageChange(productId, -1)} className='previous-button'>Previous</button>
             <button onClick={() => handleImageChange(productId, 1)} className='next-button'>Next</button>
-
-            <p className='product-description'>Name: </p>
-            <p className='product-description'>storage :</p>
-            <p className='product-description'>Ram: </p>
-            <p className='product-description'>Price:</p>
-            <p className='product-description'>Author:</p>
+              
+         
+             
+            
           </div>
         ))
       )}
