@@ -62,18 +62,20 @@
     text-transform: uppercase;
 }
 .next-button{
-    right:0px;
-    top: 26%;
-    transform: rotate(90deg);
+    position: absolute;
+    top: 30%;
+    right: 10px;
 }
 .previous-button{
-    left: 0px;
-    width: 66px;
-    top: 26%;
-    transform: rotate(90deg);
+    position: absolute;
+    top: 30%;
+    left: 10px;
 }
 .product-description{
     margin-left: 10px;
+}
+.previous-button .next-button{
+    background-color: black;
 }
 
 .card h4{
@@ -91,9 +93,9 @@
     border-radius: 4px;
     width: 60%;
 }
-.card button:hover{
-    background-color: rgb(161, 155, 155);
-    color: rgb(255, 255, 255);
+.card .checkout-button:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     border: 1px black solid;
 }
 .card .button-div{

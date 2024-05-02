@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { storage, db } from '../../Firebaseconfig';
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
 import { collection, getDocs } from 'firebase/firestore';
+import { FaArrowRight } from 'react-icons/fa';
+import { FaArrowLeft } from 'react-icons/fa';
 
 function Listing() {
   const [products, setProducts] = useState({});
@@ -67,8 +69,8 @@ function Listing() {
         Object.entries(products).map(([productId, details]) => (
           <div key={productId} className="card">
             <div className="card-image" style={{ backgroundImage: `url(${details.images[details.currentIndex] || 'placeholder.jpg'})` }}></div>
-            <button onClick={() => handleImageChange(productId, -1)} className='previous-button'>Previous</button>
-            <button onClick={() => handleImageChange(productId, 1)} className='next-button'>Next</button>
+            <FaArrowLeft onClick={() => handleImageChange(productId, -1)} className='previous-button'/>
+            <FaArrowRight onClick={() => handleImageChange(productId, 1)} className='next-button'/>
             {details.details && (
               <div className='laptop-details'>
                 <h4 className='laptop-name'>{details.details.laptop_name}</h4>
