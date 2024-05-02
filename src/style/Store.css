@@ -70,12 +70,16 @@
     position: absolute;
     top: 30%;
     left: 10px;
+    color: black;
 }
 .product-description{
     margin-left: 10px;
 }
-.previous-button .next-button{
+.previous-button,.next-button{
     background-color: black;
+    color: rgb(255, 255, 255);
+    height: 30px;
+    width: 20px;
 }
 
 .card h4{
