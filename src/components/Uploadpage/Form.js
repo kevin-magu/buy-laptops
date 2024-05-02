@@ -3,6 +3,7 @@ import { storage,auth, db} from "../../Firebaseconfig";
 import { ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 import { collection, addDoc } from "firebase/firestore";
+import { useAsyncError } from "react-router-dom";
 
 
 
@@ -10,6 +11,9 @@ function Form() {
   const [img, setImg] = useState('');
   const [img2, setImg2] = useState('');
   const [laptopName, setLaptopName] = useState('');
+  const [laptopStorage, setLaptopStorage] = useState('')
+  const [laptopMemory, setLaptopMemory ] = useState('')
+  const [laptopProcessor, setLaptopProcessor] = useState()
   const [laptopPrice, setLaptopPrice] = useState('');
   const [laptopDescription, setLaptopDescription] = useState('');
   const [error, setStatus] = useState('');
@@ -55,6 +59,9 @@ const laptopDetailsDb = collection(db, `laptop_details`)
         laptop_description: laptopDescription,
         laptop_name: laptopName,
         laptop_price: laptopPrice,
+        laptop_storage: laptopStorage,
+        laptop_memory: laptopMemory,
+        laptop_processor: laptopProcessor
       })
       
       const imgRef = ref(storage, `laptop-images/${userEmail}/${productID}`);
@@ -85,13 +92,23 @@ const laptopDetailsDb = collection(db, `laptop_details`)
           />
           <input
             type='text'
-            placeholder='laptop price'
-            value={laptopPrice} onChange={(e) => setLaptopPrice(e.target.value)}
+            placeholder='Storage Size'
+            value={laptopStorage} onChange={(e) => setLaptopStorage(e.target.value)}
+          />
+          <input
+            type='text'
+            placeholder='Memory'
+            value={laptopMemory} onChange={(e) => setLaptopMemory(e.target.value)}
+          />
+          <input
+            type='text'
+            placeholder='Processor'
+            value={laptopProcessor} onChange={(e) => setLaptopProcessor(e.target.value)}
           />
           <textarea
-            cols='30'
+            cols='30'textarea
             rows='10'
-            placeholder='Enter important laptop specifications like RAM, HDD/SSD size e.t.c'
+            placeholder='Additional Laptop Details'
             value={laptopDescription} onChange={(e) => setLaptopDescription(e.target.value)}
           ></textarea>
           <input type='file' onChange={(e) => setImg(e.target.files[0])}/>
