@@ -55,7 +55,7 @@
                 <mxCell id="31" value="" style="group" parent="1" vertex="1" connectable="0">
                     <mxGeometry x="130" y="30" width="590" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="33" value="" style="group" vertex="1" connectable="0" parent="31">
+                <mxCell id="33" value="" style="group" parent="31" vertex="1" connectable="0">
                     <mxGeometry width="590" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="28" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="33" vertex="1">
@@ -66,6 +66,9 @@
                 </mxCell>
                 <mxCell id="30" value="SEARCH" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CE76F1;fontColor=#000000;fontStyle=1" parent="33" vertex="1">
                     <mxGeometry x="500" width="90" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" value="loop throught array&lt;br&gt;check if array.product_id == productID" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="65" y="610" width="230" height="40" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
