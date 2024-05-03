@@ -33,7 +33,7 @@
 }
 .card{
     width: 350px;
-    height: 450px;
+    height: 460px;
     background-color: rgb(0, 0, 0);
     position: relative;
     border-radius: 5px;
@@ -84,6 +84,11 @@
 
 .card h4{
     margin-top: 2px;
+    background-color: rgb(72, 80, 80);
+    width: fit-content;
+    border-radius: 2px;
+    padding: 2px;
+    font-size: 14px;
 }
 .card .checkout-button{
     margin-top: 7px;
@@ -92,7 +97,7 @@
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
     border: 1px black;
-    height: 29px;
+    height: 25px;
     font-weight: bold;
     border-radius: 4px;
     width: 60%;

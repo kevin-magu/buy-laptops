@@ -4,7 +4,7 @@ import { ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 import { collection, addDoc } from "firebase/firestore";
 import { useAsyncError } from "react-router-dom";
-
+import ContentLoader from 'react-content-loader';
 
 
 function Form() {
@@ -77,6 +77,20 @@ const laptopDetailsDb = collection(db, `laptop_details`)
       console.error(error);
       setStatus("Error uploading image. Please try again later.");
     }
+    //content loader
+
+const MyLoader = () => (
+  <ContentLoader 
+    speed={2}
+    width={400}
+    height={160}
+    viewBox="0 0 400 160"
+    backgroundColor="#f3f3f3"
+    foregroundColor="#ecebeb"
+  >
+    <rect x="70" y="15" rx="4" ry="4" width="250" height="130" />
+  </ContentLoader>
+);
   }
 
   return (

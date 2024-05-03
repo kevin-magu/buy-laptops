@@ -68,7 +68,12 @@ function Listing() {
       {isLoading ? <div>Loading...</div> : (
         Object.entries(products).map(([productId, details]) => (
           <div key={productId} className="card">
-            <div className="card-image" style={{ backgroundImage: `url(${details.images[details.currentIndex] || 'placeholder.jpg'})` }}></div>
+            <div className="card-image-wrapper">  {/* Wrapper for skeleton and image */}
+              <div className="card-image-skeleton" style={{ display: details.images.length === 0 || !details.images[details.currentIndex] ? 'block' : 'none' }}> {/* Skeleton visible only when no image or image not loaded */}
+                {/* Add your skeleton UI here (e.g., using a library like `react-loading-skeleton`) */}
+              </div>
+              <div className="card-image" style={{ backgroundImage: `url(${details.images[details.currentIndex] || 'placeholder.jpg'})` }}></div>
+            </div>
             <FaArrowLeft onClick={() => handleImageChange(productId, -1)} className='previous-button'/>
             <FaArrowRight onClick={() => handleImageChange(productId, 1)} className='next-button'/>
             {details.details && (
@@ -79,8 +84,8 @@ function Listing() {
                 <h4>CPU: {details.details.laptop_processor}</h4>
                 <h4>PRICE: {details.details.laptop_price}</h4>
               </div>
-            )}<div className='button-div'><button className='checkout-button'>Check Out</button></div>
-            
+            )}
+            <div className='button-div'><button className='checkout-button'>Check Out</button></div>
           </div>
         ))
       )}
