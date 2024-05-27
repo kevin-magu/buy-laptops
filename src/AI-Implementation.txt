@@ -1,0 +1,3 @@
+Collaborative Filtering: Recommend laptops based on what similar users have purchased.
+Content-Based Filtering: Suggest laptops based on the user's past interactions (e.g., browsing history, clicked products).
+

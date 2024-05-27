@@ -62,8 +62,7 @@ function Listing() {
       }
     }));
   };
-//<FaArrowLeft onClick={() => handleImageChange(productId, -1)} className='previous-button'/>
-//<FaArrowRight onClick={() => handleImageChange(productId, 1)} className='next-button'/>
+
   return (
     <div className='listing-container'>
       {isLoading ? <div>Loading...</div> : (
@@ -75,17 +74,21 @@ function Listing() {
               </div>
               <div className="card-image" style={{ backgroundImage: `url(${details.images[details.currentIndex] || 'placeholder.jpg'})` }}></div>
             </div>
+            {/*<FaArrowLeft onClick={() => handleImageChange(productId, -1)} className='previous-button'/>
+            <FaArrowRight onClick={() => handleImageChange(productId, 1)} className='next-button'/> */}
+
             
             {details.details && (
               <div className='laptop-details'>
-               <div className='laptopname-div'><h4 className='laptop-name'>{details.details.laptop_name}</h4></div> 
+                <div className='laptopname-div'><h4 className='laptop-name'>{details.details.laptop_name}</h4></div>
                 <h4>STORAGE: {details.details.laptop_storage}</h4>
                 <h4> MEMORY: {details.details.laptop_memory}</h4>
                 <h4>CPU: {details.details.laptop_processor}</h4>
                 <h4>PRICE: {details.details.laptop_price}</h4>
+                <h4>Product ID: {details.details.product_id}</h4> {/* Corrected line */}
               </div>
             )}
-            <div className='button-div'><button className='checkout-button'>Check Out</button></div>
+            <div className='button-div'><button className='checkout-button'>Add to cart</button></div>
           </div>
         ))
       )}

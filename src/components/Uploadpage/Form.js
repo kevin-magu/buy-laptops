@@ -119,6 +119,11 @@ const MyLoader = () => (
             placeholder='Processor'
             value={laptopProcessor} onChange={(e) => setLaptopProcessor(e.target.value)}
           />
+          <input
+            type='text'
+            placeholder='Laptop Price'
+            value={laptopPrice} onChange={(e) => setLaptopPrice(e.target.value)}
+          />
           <textarea
             cols='30'textarea
             rows='10'
