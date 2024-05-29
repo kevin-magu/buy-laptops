@@ -4,6 +4,7 @@ import { ref, listAll, getDownloadURL } from 'firebase/storage';
 import { collection, getDocs } from 'firebase/firestore';
 import { FaArrowRight } from 'react-icons/fa';
 import { FaArrowLeft } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 function Listing() {
   const [products, setProducts] = useState({});
@@ -77,7 +78,7 @@ function Listing() {
             {/*<FaArrowLeft onClick={() => handleImageChange(productId, -1)} className='previous-button'/>
             <FaArrowRight onClick={() => handleImageChange(productId, 1)} className='next-button'/> */}
 
-            
+            <Link className='link' to={`/checkout?id=${details.details.product_id}`}>
             {details.details && (
               <div className='laptop-details'>
                 <div className='laptopname-div'><h4 className='laptop-name'>{details.details.laptop_name}</h4></div>
@@ -85,9 +86,12 @@ function Listing() {
                 <h4> MEMORY: {details.details.laptop_memory}</h4>
                 <h4>CPU: {details.details.laptop_processor}</h4>
                 <h4>PRICE: {details.details.laptop_price}</h4>
-                <h4>Product ID: {details.details.product_id}</h4> {/* Corrected line */}
+            
+                
+                {/* Corrected line */}
               </div>
             )}
+            </Link>
             <div className='button-div'><button className='checkout-button'>Add to cart</button></div>
           </div>
         ))
