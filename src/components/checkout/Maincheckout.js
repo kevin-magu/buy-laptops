@@ -38,6 +38,7 @@ function Checkout() {
             .map(item => getDownloadURL(item)));
             
           setImages(imageUrls);
+          console.log("this are the images from firebase", imageUrls)
         } else {
           console.error("No such document!");
         }
@@ -85,20 +86,9 @@ function Checkout() {
             <input type="number" className='quanity-input' value={numberOfLaptops} onChange={(e) => setNumberOfLaptops(e.target.value)}/>
             <button className='proceed-to-payment-button'>Proceed to Payment</button>
           </div>
-          
-          
-        
-        </div>
-       
-       
-        
-        
-        
-        
-        
-        
-        
-        
+        </div>  
+      </div>
+      <div>
         
       </div>
     </div>
