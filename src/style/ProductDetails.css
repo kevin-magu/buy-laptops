@@ -22,12 +22,13 @@
     font-size: 25px;
 }
 .details-image{
-    width: 50%;
+    width: 500px;
     height: 450px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     border: 1px black solid;
+    
     border-radius: 5px;
 }
 .checkout-card-details{
