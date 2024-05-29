@@ -5,16 +5,24 @@
     justify-content: center;
     margin-top: 80px;
 }
+.product-description{
+    margin: 0;
+}
+.laptop-name{
+    margin-bottom: 10px;
+}
+
 .details-card{
-    width: 700px;
+    margin-left: 20px;
+    width: 100%;
     display: flex;
     position: relative;
 }
 .details-card p{
-    font-size: 30px;
+    font-size: 25px;
 }
 .details-image{
-    width: 100%;
+    width: 50%;
     height: 450px;
     background-position: center;
     background-repeat: no-repeat;
@@ -29,9 +37,25 @@
 .product-description{
     margin-top: 40px;
 }
-.Proceed-to-payment{
-    position: absolute;
+.proceed-to-payment-button{
     height: 30px;
     width: 170px;
+    bottom: 0;
+    right: 120px;
+    margin-left: 30px;
+    background-color: black;
+    color: white;
+    border: 1px black;
+    border-radius: 8;
+}
+.proceed-to-payment-button:hover{
+    cursor: pointer;
+}
+.quanity-input{
+    height: 35px;
+    bottom: 0;
+}
+.bottom-elements{
+    position: absolute;
     bottom: 0;
 }

@@ -10,6 +10,7 @@ function Checkout() {
   const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [numberOfLaptops, setNumberOfLaptops] = useState(1)
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -72,13 +73,20 @@ function Checkout() {
           <div className="details-image" style={{ backgroundImage: `url(${images[currentIndex] || 'placeholder.jpg'})` }}></div>
           
           <div className="checkout-card-details">
-          <h2>{laptopDetails.laptop_name}</h2>
+          <h1 className='laptop-name'>{laptopDetails.laptop_name}</h1>
           <p><strong>Storage:</strong> {laptopDetails.laptop_storage}</p>
           <p><strong>Memory:</strong> {laptopDetails.laptop_memory}</p>
           <p><strong>Processor:</strong> {laptopDetails.laptop_processor}</p>
           <p><strong>Price:</strong> {laptopDetails.laptop_price}</p>
-          <p className='product-description'><strong>Description:</strong> {laptopDetails.laptop_description}</p>
-          <button className='Proceed-to-payment'>Proceed to Payment</button>
+          <p className='product-description'><strong>Description:</strong> </p>
+          <p>{laptopDetails.laptop_description}</p>
+         <div className='bottom-elements'>
+            <p>Quantity</p>
+            <input type="number" className='quanity-input' value={numberOfLaptops} onChange={(e) => setNumberOfLaptops(e.target.value)}/>
+            <button className='proceed-to-payment-button'>Proceed to Payment</button>
+          </div>
+          
+          
         
         </div>
        
