@@ -15,6 +15,7 @@ function Checkout() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const productId = queryParams.get('id').substring(0, 8);
+  const imageUrlsArray = []
 
   useEffect(() => {
     const fetchLaptopDetails = async () => {
@@ -33,10 +34,17 @@ function Checkout() {
           const imageRef = ref(storage, `laptop-images/${email}`);
           const imageItems = await listAll(imageRef);
 
+          
           const imageUrls = await Promise.all(imageItems.items
             .filter(item => item.name.substring(0, 8) === productId)
             .map(item => getDownloadURL(item)));
+        
+           for(let imageUrl of imageUrls){
+            imageUrlsArray.push(imageUrl)
+           }
+            console.log("THis is the image urls array", imageUrlsArray)
             
+          
           setImages(imageUrls);
           console.log("this are the images from firebase", imageUrls)
         } else {
@@ -66,6 +74,10 @@ function Checkout() {
     return <div>No laptop details found.</div>;
   }
 
+//fetch images of the current id
+
+
+
   return (
     <div className="product-details-wrapper">
      
@@ -89,7 +101,7 @@ function Checkout() {
         </div>  
       </div>
       <div>
-        
+
       </div>
     </div>
   );

@@ -16,7 +16,9 @@ function Listing() {
         const storageRef = ref(storage, 'laptop-images/');
         const items = await listAll(storageRef);
         const productImages = {};
-
+        //check fetched items
+        console.log("this are the items from the database",items)
+        
         for (let prefix of items.prefixes) {
           const prefixRef = ref(storage, `laptop-images/${prefix.name}`);
           const emailContents = await listAll(prefixRef);
@@ -70,11 +72,13 @@ function Listing() {
         Object.entries(products).map(([productId, details]) => (
           <div key={productId} className="card">
             <div className="card-image-wrapper">  {/* Wrapper for skeleton and image */}
-              <div className="card-image-skeleton" style={{ display: details.images.length === 0 || !details.images[details.currentIndex] ? 'block' : 'none' }}> {/* Skeleton visible only when no image or image not loaded */}
+              <div className="card-image-skeleton" style={{ display: details.images.length === 0 || !details.images[details.currentIndex] ? 'block' : 'none' }}>
+                 {/* Skeleton visible only when no image or image not loaded */}
                 {/* Add your skeleton UI here (e.g., using a library like `react-loading-skeleton`) */}
               </div>
               <div className="card-image" style={{ backgroundImage: `url(${details.images[details.currentIndex] || 'placeholder.jpg'})` }}></div>
             </div>
+
             {/*<FaArrowLeft onClick={() => handleImageChange(productId, -1)} className='previous-button'/>
             <FaArrowRight onClick={() => handleImageChange(productId, 1)} className='next-button'/> */}
 
