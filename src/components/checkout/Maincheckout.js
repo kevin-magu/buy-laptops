@@ -11,6 +11,9 @@ function Checkout() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [numberOfLaptops, setNumberOfLaptops] = useState(1);
+  const [clicked, setIsclicked] = useState(true)//check if an image is clicked
+  const [imageDefault, setImageDefault] = useState(true) //check if the state of the image background is default
+
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -52,9 +55,10 @@ function Checkout() {
     }
   }, [productId]);
 
-  const handleImageChange = (direction) => {
-    setCurrentIndex((prevIndex) => (prevIndex + direction + images.length) % images.length);
-  };
+  //function to handle clicking of an image
+  function handleImageGalleryClick(){
+    console.log(images.index)
+  }
 
   if (isLoading) {
     return <div>Loading...</div>;
