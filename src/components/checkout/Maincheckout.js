@@ -10,12 +10,11 @@ function Checkout() {
   const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
-  const [numberOfLaptops, setNumberOfLaptops] = useState(1)
+  const [numberOfLaptops, setNumberOfLaptops] = useState(1);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const productId = queryParams.get('id').substring(0, 8);
-  const imageUrlsArray = []
 
   useEffect(() => {
     const fetchLaptopDetails = async () => {
@@ -33,20 +32,11 @@ function Checkout() {
           const email = laptopDetails.email; // Assuming email is used as part of the path
           const imageRef = ref(storage, `laptop-images/${email}`);
           const imageItems = await listAll(imageRef);
-
-          
           const imageUrls = await Promise.all(imageItems.items
             .filter(item => item.name.substring(0, 8) === productId)
-            .map(item => getDownloadURL(item)));
-        
-           for(let imageUrl of imageUrls){
-            imageUrlsArray.push(imageUrl)
-           }
-            console.log("THis is the image urls array", imageUrlsArray)
-            
-          
+            .map(item => getDownloadURL(item)));    
+
           setImages(imageUrls);
-          console.log("this are the images from firebase", imageUrls)
         } else {
           console.error("No such document!");
         }
@@ -74,18 +64,11 @@ function Checkout() {
     return <div>No laptop details found.</div>;
   }
 
-//fetch images of the current id
-
-
-
   return (
     <div className="product-details-wrapper">
-     
       <div className="details-card">
-        
-          <div className="details-image" style={{ backgroundImage: `url(${images[currentIndex] || 'placeholder.jpg'})` }}></div>
-          
-          <div className="checkout-card-details">
+        <div className="details-image" style={{ backgroundImage: `url(${images[currentIndex] || 'placeholder.jpg'})` }}></div>
+        <div className="checkout-card-details">
           <h1 className='laptop-name'>{laptopDetails.laptop_name}</h1>
           <p><strong>Storage:</strong> {laptopDetails.laptop_storage}</p>
           <p><strong>Memory:</strong> {laptopDetails.laptop_memory}</p>
@@ -93,15 +76,22 @@ function Checkout() {
           <p><strong>Price:</strong> {laptopDetails.laptop_price}</p>
           <p className='product-description'><strong>Description:</strong> </p>
           <p>{laptopDetails.laptop_description}</p>
-         <div className='bottom-elements'>
+          <div className='bottom-elements'>
             <p>Quantity</p>
-            <input type="number" className='quanity-input' value={numberOfLaptops} onChange={(e) => setNumberOfLaptops(e.target.value)}/>
+            <input type="number" className='quanity-input' value={numberOfLaptops} onChange={(e) => setNumberOfLaptops(e.target.value)} />
             <button className='proceed-to-payment-button'>Proceed to Payment</button>
           </div>
         </div>  
       </div>
-      <div>
 
+      <div className="image-gallery-wrapper">
+        {images.map((url, index) => (
+          <div
+            key={index}
+            className="image-gallery"
+            style={{ backgroundImage: `url(${url})` }}
+          ></div>
+        ))}
       </div>
     </div>
   );

@@ -60,3 +60,17 @@
     position: absolute;
     bottom: 0;
 }
+.image-gallery{
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    background-position: center;
+    background-size: cover;
+    bottom: -20px;
+    left: 10px;
+    border: 1px rgb(0, 0, 0) solid;
+    border-radius: 5px;
+    flex-basis: content;
+    display: flex;
+    margin-right: 100px;
+}
