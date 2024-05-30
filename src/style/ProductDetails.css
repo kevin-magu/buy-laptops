@@ -63,14 +63,17 @@
 .image-gallery{
     width: 150px;
     height: 150px;
-    position: absolute;
     background-position: center;
     background-size: cover;
-    bottom: -20px;
-    left: 10px;
+    bottom: 0px;
+    right: 500px;
     border: 1px rgb(0, 0, 0) solid;
     border-radius: 5px;
-    flex-basis: content;
     display: flex;
-    margin-right: 100px;
+    margin-right: 400px;
+    position: absolute;    
+}
+.image-gallery-wrapper{
+    display: flex;
+    flex-direction: column;
 }
