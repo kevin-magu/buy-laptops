@@ -4,6 +4,7 @@ import { storage, db } from '../../Firebaseconfig';
 import { ref, getDownloadURL, listAll } from 'firebase/storage';
 import { doc, getDocs, collection } from 'firebase/firestore';
 import "../../style/ProductDetails.css"
+import { click } from '@testing-library/user-event/dist/click';
 
 function Checkout() {
   const [laptopDetails, setLaptopDetails] = useState(null);
@@ -55,10 +56,9 @@ function Checkout() {
     }
   }, [productId]);
 
-  //function to handle clicking of an image
-  function handleImageGalleryClick(){
-    console.log(images.index)
-  }
+//function to handle clicking of an image
+
+
 
   if (isLoading) {
     return <div>Loading...</div>;
