@@ -8,6 +8,7 @@ import Store from './pages/Store';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Checkout from './pages/Checkout';
+import Cart from './pages/Cart';
 
 import Navbar from './components/Homepage/Navbar';
 import Footer from './components/Homepage/Footer';
@@ -25,6 +26,7 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={ <Register />} />
         <Route exact path="/checkout" element={<Checkout />} />
+        <Route exact path='/cart' element={<Cart />} />
       </Routes>
 
       <Footer/>

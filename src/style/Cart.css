@@ -1,0 +1,10 @@
+.cart-main-page-wrapper{
+    min-height: 70vh;
+}
+.cart-heading{
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top: 10px;
+}
