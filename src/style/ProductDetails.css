@@ -29,8 +29,20 @@
     background-repeat: no-repeat;
     background-size: cover;
     border: 1px black solid;
-    
+    animation: popup 1s ease-in-out;
     border-radius: 5px;
+}
+@keyframes popup {
+    0%{
+        opacity: 20%;
+    }
+    50%{
+        opacity: 50%;
+    }
+    100%{
+        opacity: 100%;
+    }
+    
 }
 .checkout-card-details{
     margin-left: 30px;
@@ -80,4 +92,20 @@
     position: absolute; 
     bottom: 0px;
     left: 20px;
+}
+.add-to-cart-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 170px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 5px;
+}
+.add-to-cart-button:hover{
+    background-color: black;
+    color: white;
+    border: none;
 }

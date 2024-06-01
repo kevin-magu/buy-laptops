@@ -5,6 +5,7 @@ import { ref, getDownloadURL, listAll } from 'firebase/storage';
 import { doc, getDocs, collection } from 'firebase/firestore';
 import "../../style/ProductDetails.css"
 import { click } from '@testing-library/user-event/dist/click';
+import { FaShoppingCart } from 'react-icons/fa';
 
 function Checkout() {
   const [laptopDetails, setLaptopDetails] = useState(null);
@@ -75,6 +76,7 @@ const handleImageGalleryClick = (index)=>{
       <div className="details-card">
         <div className="details-image" style={{ backgroundImage: `url(${images[currentIndex] || 'placeholder.jpg'})` }}></div>
         <div className="checkout-card-details">
+          <button className='add-to-cart-button'>Add to cart <FaShoppingCart /> </button>
           <h1 className='laptop-name'>{laptopDetails.laptop_name}</h1>
           <p><strong>Storage:</strong> {laptopDetails.laptop_storage}</p>
           <p><strong>Memory:</strong> {laptopDetails.laptop_memory}</p>
@@ -97,7 +99,7 @@ const handleImageGalleryClick = (index)=>{
             className="image-gallery"
             style={{ backgroundImage: `url(${url})` }}
             onClick={() => handleImageGalleryClick(index)}
-          >{<p>This is the index, {index}</p>}</div>
+          ></div>
         ))}
       </div>
     </div>
