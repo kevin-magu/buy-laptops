@@ -13,8 +13,10 @@ function Checkout() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [numberOfLaptops, setNumberOfLaptops] = useState(1);
-  const [clicked, setIsclicked] = useState(true)//check if an image is clicked
-  const [imageDefault, setImageDefault] = useState(true) //check if the state of the image background is default
+  
+  const [itemId, setItemId] = useState('')
+  const [itemPrice, setItemPrice] = useState('')
+  
 
 
   const location = useLocation();
@@ -61,6 +63,10 @@ function Checkout() {
 const handleImageGalleryClick = (index)=>{
   setCurrentIndex(index)
 }
+//function to handle adding items to cart
+const addItemToCart = () => {
+  
+} 
 
 
   if (isLoading) {
