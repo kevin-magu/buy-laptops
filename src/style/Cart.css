@@ -1,5 +1,7 @@
 .cart-main-page-wrapper{
     min-height: 70vh;
+    display: flex;
+    justify-content: center;
 }
 .cart-heading{
     width: 100%;
@@ -7,4 +9,12 @@
     align-items: center;
     display: flex;
     margin-top: 10px;
+    position: absolute;
+    top: 100px;
+}
+.items-main-section{
+    width: 80%;
+    height: 400px;
+    background-color: aqua;
+    margin-top: 60px;
 }
