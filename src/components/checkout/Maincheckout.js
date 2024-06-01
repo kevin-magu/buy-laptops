@@ -57,7 +57,9 @@ function Checkout() {
   }, [productId]);
 
 //function to handle clicking of an image
-
+const handleImageGalleryClick = (index)=>{
+  setCurrentIndex(index)
+}
 
 
   if (isLoading) {
@@ -94,7 +96,8 @@ function Checkout() {
             key={index}
             className="image-gallery"
             style={{ backgroundImage: `url(${url})` }}
-          ></div>
+            onClick={() => handleImageGalleryClick(index)}
+          >{<p>This is the index, {index}</p>}</div>
         ))}
       </div>
     </div>
