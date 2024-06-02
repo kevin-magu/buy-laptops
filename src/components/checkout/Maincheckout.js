@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { storage, db } from '../../Firebaseconfig';
 import { ref, getDownloadURL, listAll } from 'firebase/storage';
-import { doc, getDocs, collection } from 'firebase/firestore';
+import { doc, getDocs, collection, addDoc } from 'firebase/firestore';
 import "../../style/ProductDetails.css"
 import { click } from '@testing-library/user-event/dist/click';
 import { FaShoppingCart } from 'react-icons/fa';
@@ -13,9 +13,8 @@ function Checkout() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [numberOfLaptops, setNumberOfLaptops] = useState(1);
-  
-  const [itemId, setItemId] = useState('')
-  const [itemPrice, setItemPrice] = useState('')
+  const [addingToCart, setAddingToCart] = useState(false)
+
   
 
 
@@ -63,9 +62,26 @@ function Checkout() {
 const handleImageGalleryClick = (index)=>{
   setCurrentIndex(index)
 }
+
+
 //function to handle adding items to cart
-const addItemToCart = () => {
-  
+const addItemToCart = async () => {
+  //database reference 
+
+  const itemDetailsCart = collection(db, `cart`)
+  try {
+    setAddingToCart(true)
+    const uploading = await addDoc(itemDetailsCart, { 
+      itemId: productId,
+      item_price: laptopDetails.laptop_price,
+    })
+    if(uploading){
+      setAddingToCart(false)
+        console.log("Product sent to cart")
+    }
+  } catch (error) {
+    console.log("there was an error uploading item details", error)
+  }
 } 
 
 
@@ -82,7 +98,7 @@ const addItemToCart = () => {
       <div className="details-card">
         <div className="details-image" style={{ backgroundImage: `url(${images[currentIndex] || 'placeholder.jpg'})` }}></div>
         <div className="checkout-card-details">
-          <button className='add-to-cart-button'>Add to cart <FaShoppingCart /> </button>
+          <button className='add-to-cart-button' onClick={addItemToCart}>{addingToCart?"Adding to Cart": "Add to cart"} <FaShoppingCart /> </button>
           <h1 className='laptop-name'>{laptopDetails.laptop_name}</h1>
           <p><strong>Storage:</strong> {laptopDetails.laptop_storage}</p>
           <p><strong>Memory:</strong> {laptopDetails.laptop_memory}</p>

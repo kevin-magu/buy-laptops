@@ -1,6 +1,11 @@
 import React from 'react'
 
 function Maincartpage() {
+/* 
+  loop through storage and get the image of the laptop with the same ID
+*/
+
+
   return (
     <div className='cart-main-page-wrapper'>
         <h4 className='cart-heading'>Cart</h4>
