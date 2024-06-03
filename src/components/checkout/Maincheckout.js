@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { storage, db } from '../../Firebaseconfig';
+import { storage, db, auth } from '../../Firebaseconfig';
 import { ref, getDownloadURL, listAll } from 'firebase/storage';
-import { doc, getDocs, collection, addDoc } from 'firebase/firestore';
+import { doc, getDocs, collection, addDoc, } from 'firebase/firestore';
 import "../../style/ProductDetails.css"
 import { click } from '@testing-library/user-event/dist/click';
 import { FaShoppingCart } from 'react-icons/fa';
+import { getAuth } from 'firebase/auth';
 
 function Checkout() {
   const [laptopDetails, setLaptopDetails] = useState(null);
@@ -14,6 +15,7 @@ function Checkout() {
   const [isLoading, setIsLoading] = useState(true);
   const [numberOfLaptops, setNumberOfLaptops] = useState(1);
   const [addingToCart, setAddingToCart] = useState(false)
+  const [user, setUser] = useState(null)
 
   
 
@@ -63,12 +65,17 @@ const handleImageGalleryClick = (index)=>{
   setCurrentIndex(index)
 }
 
-
+const auth = getAuth
+if(auth){
+  console.log(auth)
+}
+ 
+console.log("this is the user email",user) 
 //function to handle adding items to cart
 const addItemToCart = async () => {
   //database reference 
-
-  const itemDetailsCart = collection(db, `cart`)
+  const dbRef = doc(db, "cart", laptopDetails.email)
+  const itemDetailsCart = collection(dbRef, "items")
   try {
     setAddingToCart(true)
     const uploading = await addDoc(itemDetailsCart, { 
