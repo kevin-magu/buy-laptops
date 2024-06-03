@@ -1,9 +1,19 @@
 import React from 'react'
+import { db, storage } from '../../Firebaseconfig'
+import { collection } from 'firebase/firestore'
 
 function Maincartpage() {
 /* 
   loop through storage and get the image of the laptop with the same ID
 */
+const currentLoggedInUser = async () => {
+  
+}
+const getCartItemsImages = async () => {
+  const cartItemsIds= []
+  const itemsFromFirestore = await getDocs(collection(db, "laptop_details"))
+}
+
 
 
   return (

@@ -93,6 +93,9 @@ const addItemToCart = async () => {
     return <div>No laptop details found.</div>;
   }
 
+
+  
+
   return (
     <div className="product-details-wrapper">
       <div className="details-card">
