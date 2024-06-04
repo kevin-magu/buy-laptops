@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { storage, db, auth } from '../../Firebaseconfig';
 import { ref, getDownloadURL, listAll } from 'firebase/storage';
-import { doc, getDocs, collection, addDoc, } from 'firebase/firestore';
-import "../../style/ProductDetails.css"
-import { click } from '@testing-library/user-event/dist/click';
+import { doc, getDocs, collection, addDoc } from 'firebase/firestore';
+import "../../style/ProductDetails.css";
 import { FaShoppingCart } from 'react-icons/fa';
 import { getAuth } from 'firebase/auth';
 
@@ -14,11 +13,9 @@ function Checkout() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [numberOfLaptops, setNumberOfLaptops] = useState(1);
-  const [addingToCart, setAddingToCart] = useState(false)
-  const [user, setUser] = useState(null)
-
-  
-
+  const [addingToCart, setAddingToCart] = useState(false);
+  const [currentEmail, setCurrentEmail] = useState('');
+  const [itemsInLocalCart, setItemsInLocalCart] = useState([]);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -32,7 +29,7 @@ function Checkout() {
         const laptopDetails = querySnapshot.docs
           .map(doc => ({ id: doc.id, ...doc.data() }))
           .find(detail => detail.product_id.substring(0, 8) === productId);
-          
+
         if (laptopDetails) {
           setLaptopDetails(laptopDetails);
 
@@ -42,7 +39,7 @@ function Checkout() {
           const imageItems = await listAll(imageRef);
           const imageUrls = await Promise.all(imageItems.items
             .filter(item => item.name.substring(0, 8) === productId)
-            .map(item => getDownloadURL(item)));    
+            .map(item => getDownloadURL(item)));
 
           setImages(imageUrls);
         } else {
@@ -60,37 +57,62 @@ function Checkout() {
     }
   }, [productId]);
 
-//function to handle clicking of an image
-const handleImageGalleryClick = (index)=>{
-  setCurrentIndex(index)
-}
+  // Function to handle clicking of an image
+  const handleImageGalleryClick = (index) => {
+    setCurrentIndex(index);
+  };
 
-const auth = getAuth
-if(auth){
-  console.log(auth)
-}
- 
-console.log("this is the user email",user) 
-//function to handle adding items to cart
-const addItemToCart = async () => {
-  //database reference 
-  const dbRef = doc(db, "cart", laptopDetails.email)
-  const itemDetailsCart = collection(dbRef, "items")
-  try {
-    setAddingToCart(true)
-    const uploading = await addDoc(itemDetailsCart, { 
-      itemId: productId,
-      item_price: laptopDetails.laptop_price,
-    })
-    if(uploading){
-      setAddingToCart(false)
-        console.log("Product sent to cart")
+  // Get the current authenticated user
+  useEffect(() => {
+    const authInstance = getAuth();
+    if (authInstance.currentUser) {
+      setCurrentEmail(authInstance.currentUser.email);
+    } else {
+      console.log("Not logged in");
     }
-  } catch (error) {
-    console.log("there was an error uploading item details", error)
-  }
-} 
+  }, []);
 
+  console.log(currentEmail);
+
+  // Function to handle adding items to cart
+  const addItemToCart = async () => {
+    const authInstance = getAuth();
+    if (authInstance.currentUser === null) {
+      if (itemsInLocalCart.length === 0) {
+        setItemsInLocalCart([...itemsInLocalCart, productId]);
+        console.log("Items in local storage length", itemsInLocalCart.length);
+        console.log(itemsInLocalCart);
+      } else {
+        let itemExists = false;
+        for (let i = 0; i < itemsInLocalCart.length; i++) {
+          if (itemsInLocalCart[i] === productId) {
+            itemExists = true;
+            break;
+          }
+        }
+        if (!itemExists) {
+          setItemsInLocalCart([...itemsInLocalCart, productId]);
+        }
+      }
+    } else {
+      const userEmail = authInstance.currentUser.email;
+      const dbRef = doc(db, "cart", userEmail);
+      const itemDetailsCart = collection(dbRef, "items");
+      try {
+        setAddingToCart(true);
+        const uploading = await addDoc(itemDetailsCart, {
+          itemId: productId,
+          item_price: laptopDetails.laptop_price,
+        });
+        if (uploading) {
+          setAddingToCart(false);
+          console.log("Product sent to cart");
+        }
+      } catch (error) {
+        console.error("There was an error uploading item details", error);
+      }
+    }
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -100,28 +122,32 @@ const addItemToCart = async () => {
     return <div>No laptop details found.</div>;
   }
 
-
-  
-
   return (
     <div className="product-details-wrapper">
       <div className="details-card">
         <div className="details-image" style={{ backgroundImage: `url(${images[currentIndex] || 'placeholder.jpg'})` }}></div>
         <div className="checkout-card-details">
-          <button className='add-to-cart-button' onClick={addItemToCart}>{addingToCart?"Adding to Cart": "Add to cart"} <FaShoppingCart /> </button>
+          <button className='add-to-cart-button' onClick={addItemToCart}>
+            {addingToCart ? "Adding to Cart" : "Add to cart"} <FaShoppingCart />
+          </button>
           <h1 className='laptop-name'>{laptopDetails.laptop_name}</h1>
           <p><strong>Storage:</strong> {laptopDetails.laptop_storage}</p>
           <p><strong>Memory:</strong> {laptopDetails.laptop_memory}</p>
           <p><strong>Processor:</strong> {laptopDetails.laptop_processor}</p>
           <p><strong>Price:</strong> {laptopDetails.laptop_price}</p>
-          <p className='product-description'><strong>Description:</strong> </p>
+          <p className='product-description'><strong>Description:</strong></p>
           <p>{laptopDetails.laptop_description}</p>
           <div className='bottom-elements'>
             <p>Quantity</p>
-            <input type="number" className='quanity-input' value={numberOfLaptops} onChange={(e) => setNumberOfLaptops(e.target.value)} />
+            <input
+              type="number"
+              className='quantity-input'
+              value={numberOfLaptops}
+              onChange={(e) => setNumberOfLaptops(e.target.value)}
+            />
             <button className='proceed-to-payment-button'>Proceed to Payment</button>
           </div>
-        </div>  
+        </div>
       </div>
 
       <div className="image-gallery-wrapper">

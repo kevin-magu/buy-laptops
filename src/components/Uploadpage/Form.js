@@ -77,7 +77,8 @@ const laptopDetailsDb = collection(db, `laptop_details`)
       console.error(error);
       setStatus("Error uploading image. Please try again later.");
     }
-    //content loader
+
+//content loader
 
   }
 

@@ -2,23 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { storage, db } from '../../Firebaseconfig';
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
 import { collection, getDocs } from 'firebase/firestore';
-import { FaArrowRight } from 'react-icons/fa';
-import { FaArrowLeft } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+//import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
 
 function Listing() {
   const [products, setProducts] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchImages = async () => {
+    const fetchImagesAndDetails = async () => {
       try {
         const storageRef = ref(storage, 'laptop-images/');
         const items = await listAll(storageRef);
         const productImages = {};
-        //check fetched items
-        console.log("this are the items from the database",items)
-        
+
+        // Fetch images from Firebase Storage
         for (let prefix of items.prefixes) {
           const prefixRef = ref(storage, `laptop-images/${prefix.name}`);
           const emailContents = await listAll(prefixRef);
@@ -30,7 +28,7 @@ function Listing() {
           }
         }
 
-        // After images are fetched, fetch product details
+        // Fetch product details from Firestore
         const querySnapshot = await getDocs(collection(db, "laptop_details"));
         const laptopDetails = querySnapshot.docs.map(doc => ({
           id: doc.id,
@@ -48,12 +46,12 @@ function Listing() {
         setProducts(productImages);
         setIsLoading(false);
       } catch (error) {
-        console.error("An Error occurred:", error);
+        console.error("An error occurred:", error);
         setIsLoading(false);
       }
     };
 
-    fetchImages();
+    fetchImagesAndDetails();
   }, []);
 
   const handleImageChange = (productId, direction) => {
@@ -71,31 +69,25 @@ function Listing() {
       {isLoading ? <div>Loading...</div> : (
         Object.entries(products).map(([productId, details]) => (
           <div key={productId} className="card">
-            <div className="card-image-wrapper">  {/* Wrapper for skeleton and image */}
+            <div className="card-image-wrapper">
               <div className="card-image-skeleton" style={{ display: details.images.length === 0 || !details.images[details.currentIndex] ? 'block' : 'none' }}>
-                 {/* Skeleton visible only when no image or image not loaded */}
-                {/* Add your skeleton UI here (e.g., using a library like `react-loading-skeleton`) */}
+                {/* Add your skeleton UI here */}
               </div>
               <div className="card-image" style={{ backgroundImage: `url(${details.images[details.currentIndex] || 'placeholder.jpg'})` }}></div>
+              
+              
             </div>
-
-            {/*<FaArrowLeft onClick={() => handleImageChange(productId, -1)} className='previous-button'/>
-            <FaArrowRight onClick={() => handleImageChange(productId, 1)} className='next-button'/> */}
-
-            <Link className='link' to={`/checkout?id=${details.details.product_id}`}>
             {details.details && (
-              <div className='laptop-details'>
-                <div className='laptopname-div'><h4 className='laptop-name'>{details.details.laptop_name}</h4></div>
-                <h4>STORAGE: {details.details.laptop_storage}</h4>
-                <h4> MEMORY: {details.details.laptop_memory}</h4>
-                <h4>CPU: {details.details.laptop_processor}</h4>
-                <h4>PRICE: {details.details.laptop_price}</h4>
-            
-                
-                {/* Corrected line */}
-              </div>
+              <Link className='link' to={`/checkout?id=${details.details.product_id}`}>
+                <div className='laptop-details'>
+                  <div className='laptopname-div'><h4 className='laptop-name'>{details.details.laptop_name}</h4></div>
+                  <h4>STORAGE: {details.details.laptop_storage}</h4>
+                  <h4> MEMORY: {details.details.laptop_memory}</h4>
+                  <h4>CPU: {details.details.laptop_processor}</h4>
+                  <h4>PRICE: {details.details.laptop_price}</h4>
+                </div>
+              </Link>
             )}
-            </Link>
             <div className='button-div'><button className='checkout-button'>Add to cart</button></div>
           </div>
         ))
