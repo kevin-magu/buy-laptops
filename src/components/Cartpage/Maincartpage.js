@@ -1,6 +1,6 @@
 import React from 'react'
 import { db, storage } from '../../Firebaseconfig'
-import { collection } from 'firebase/firestore'
+import { collection, getDocs } from 'firebase/firestore'
 
 function Maincartpage() {
 /* 
@@ -11,10 +11,11 @@ const currentLoggedInUser = async () => {
 }
 const getCartItemsImages = async () => {
   const cartItemsIds= []
-  const itemsFromFirestore = await getDocs(collection(db, "laptop_details"))
+  const itemsFromFirestore = await getDocs(collection(db, "carts/items"))
+  console.log("items from firestore",itemsFromFirestore)
 }
 
-
+getCartItemsImages()
 
   return (
     <div className='cart-main-page-wrapper'>

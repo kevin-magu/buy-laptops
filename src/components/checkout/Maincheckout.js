@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { storage, db, auth } from '../../Firebaseconfig';
+import { storage, db } from '../../Firebaseconfig';
 import { ref, getDownloadURL, listAll } from 'firebase/storage';
 import { doc, getDocs, collection, addDoc } from 'firebase/firestore';
 import "../../style/ProductDetails.css";
@@ -57,6 +57,12 @@ function Checkout() {
     }
   }, [productId]);
 
+  // Log the length of itemsInLocalCart whenever it changes
+  useEffect(() => {
+    console.log("Items in local storage length", itemsInLocalCart.length);
+    console.log(itemsInLocalCart);
+  }, [itemsInLocalCart]);
+
   // Function to handle clicking of an image
   const handleImageGalleryClick = (index) => {
     setCurrentIndex(index);
@@ -72,28 +78,26 @@ function Checkout() {
     }
   }, []);
 
-  console.log(currentEmail);
+  // Sync itemsInLocalCart with local storage
+  useEffect(() => {
+    const storedItems = JSON.parse(localStorage.getItem('itemsInLocalCart')) || [];
+    setItemsInLocalCart(storedItems);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('itemsInLocalCart', JSON.stringify(itemsInLocalCart));
+  }, [itemsInLocalCart]);
 
   // Function to handle adding items to cart
   const addItemToCart = async () => {
     const authInstance = getAuth();
     if (authInstance.currentUser === null) {
-      if (itemsInLocalCart.length === 0) {
-        setItemsInLocalCart([...itemsInLocalCart, productId]);
-        console.log("Items in local storage length", itemsInLocalCart.length);
-        console.log(itemsInLocalCart);
-      } else {
-        let itemExists = false;
-        for (let i = 0; i < itemsInLocalCart.length; i++) {
-          if (itemsInLocalCart[i] === productId) {
-            itemExists = true;
-            break;
-          }
+      setItemsInLocalCart(prevItems => {
+        if (!prevItems.includes(productId)) {
+          return [...prevItems, productId];
         }
-        if (!itemExists) {
-          setItemsInLocalCart([...itemsInLocalCart, productId]);
-        }
-      }
+        return prevItems;
+      });
     } else {
       const userEmail = authInstance.currentUser.email;
       const dbRef = doc(db, "cart", userEmail);
