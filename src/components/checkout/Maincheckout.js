@@ -33,7 +33,7 @@ function Checkout() {
         if (laptopDetails) {
           setLaptopDetails(laptopDetails);
 
-          // Fetch images from Firebase Storage
+        // Fetch images from Firebase Storage
           const email = laptopDetails.email; // Assuming email is used as part of the path
           const imageRef = ref(storage, `laptop-images/${email}`);
           const imageItems = await listAll(imageRef);

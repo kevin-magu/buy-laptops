@@ -54,7 +54,7 @@ function Listing() {
     fetchImagesAndDetails();
   }, []);
 
-  const handleImageChange = (productId, direction) => {
+ /* const handleImageChange = (productId, direction) => {
     setProducts(currentProducts => ({
       ...currentProducts,
       [productId]: {
@@ -62,7 +62,7 @@ function Listing() {
         currentIndex: (currentProducts[productId].currentIndex + direction + currentProducts[productId].images.length) % currentProducts[productId].images.length,
       }
     }));
-  };
+  };*/
 
   return (
     <div className='listing-container'>
