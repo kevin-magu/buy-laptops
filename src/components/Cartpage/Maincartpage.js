@@ -3,6 +3,7 @@ import { db, storage } from '../../Firebaseconfig'
 import { collection, getDocs,doc } from 'firebase/firestore'
 import { auth } from '../../Firebaseconfig'
 import userEvent from '@testing-library/user-event'
+import { listAll, ref } from 'firebase/storage'
 function Maincartpage() {
 /* 
   loop through storage and get the image of the laptop with the same ID
@@ -23,12 +24,27 @@ function Maincartpage() {
         const fetchItemsfromCart = async () =>{
           if(true){
           try{
-            const itemsCollection = collection(db, `cart/${userEmail}/items`)
+            const itemsCollection = collection(db, `cart/wanjaukevinmagu@gmail.com/items`)
             const itemsSnapshot = await getDocs(itemsCollection);
             const itemsList = itemsSnapshot.docs.map(doc => doc.data())
             setCartItems(itemsList)
-            console.log("items from database",cartItems)
+            console.log("items from database",itemsList)
+            
+           /* for(let item in cartItems.itemId){
+                cartItemsArray.push(item)
+            } */
+           console.log("this are the item ids",itemsList)
+           console.log("itemlist length", itemsList.length)
+           const cartItemsIdArray = []
+           for(let i =0; i<itemsList.length; i++){
+            cartItemsIdArray.push(itemsList[i].itemId)
+           }
+           console.log(cartItemsIdArray);
 
+           //get image matching the id from cart
+           const storageRef = ref(storage, 'laptop-images/')
+           const images = await listAll(storageRef)
+           console.log("This are the images from storage",images) 
           }catch(error){
             console.error("error fetching cart items", error) 
           }
@@ -42,13 +58,16 @@ function Maincartpage() {
 
   useEffect(() => {
     const getLaptopIdsForCart= async () =>{
-      const dbRef = collection(db, `laptop_details/`)
+      const dbRef = collection(db, `laptop_details`)
       const getLaptopDetails = await getDocs(dbRef)
-      const laptopPrice = doc.map(doc => doc.data())
+      const laptopPrice = getLaptopDetails.docs.map(doc => doc.data())
       setLaptopPrice(laptopPrice)
+      
     }
+    getLaptopIdsForCart()
   
   },[])
+  
 
   
   
