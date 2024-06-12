@@ -3,7 +3,7 @@ import { db, storage } from '../../Firebaseconfig'
 import { collection, getDocs,doc } from 'firebase/firestore'
 import { auth } from '../../Firebaseconfig'
 import userEvent from '@testing-library/user-event'
-import { listAll, ref } from 'firebase/storage'
+import { getDownloadURL, listAll, ref } from 'firebase/storage'
 function Maincartpage() {
 /* 
   loop through storage and get the image of the laptop with the same ID
@@ -12,6 +12,7 @@ function Maincartpage() {
     const [cartItems, setCartItems] = useState('')
     const [iteamId, setItemsId] = useState([])
     const [laptopPrice, setLaptopPrice] = useState('')
+    const imageUrls = []
 
     useEffect (() =>{
       const user = auth.currentUser
@@ -42,15 +43,26 @@ function Maincartpage() {
            console.log(cartItemsIdArray);
 
            //get image matching the id from cart
-           const storageRef = ref(storage, 'laptop-images/')
-           const images = await listAll(storageRef)
-           console.log("This are the images from storage",images) 
+           const storageRef = ref(storage, `laptop-images`)
+           const emailDirectories = await listAll(storageRef)
+           const emailContents = await listAll(prefixes.fullPath)
+
+           
+           for(let prefixes of emailDirectories.prefixes){
+             
+             
+             
+          } 
+
+           console.log("image urls",imageUrls)
+          
           }catch(error){
             console.error("error fetching cart items", error) 
           }
       }
       
     }
+    // 
     fetchItemsfromCart()
     }, [userEmail])
 
@@ -67,9 +79,6 @@ function Maincartpage() {
     getLaptopIdsForCart()
   
   },[])
-  
-
-  
   
   console.log("this is the user email",userEmail)
   return (
