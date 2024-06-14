@@ -87,12 +87,17 @@ function Maincartpage() {
       <h4 className='cart-heading'>Cart</h4>
       
       <div className='items-main-section'>
-        <h3 className='item-category'>Laptops</h3>
+        <div className="cart-subtitles">
+          <h4>Laptops</h4>
+          <h4>Quantity</h4>
+          <h4>Total Price</h4>
+        </div>
+        
         {cartItems.length > 0 ? (
           cartItems.map((item, index) => (
             <div key={index} className='item-main-section'>
               <div className='item-image' style={{ backgroundImage: `url(${imageUrls[index] || 'placeholder.jpg'})` }}></div>
-              <div className='item-quantity'>Quantity: {item.quantity}</div>
+              
               <div className='item-price'>Price: {item.item_price}</div>
               
             </div>

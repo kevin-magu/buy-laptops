@@ -20,7 +20,7 @@
 }
 
 .items-main-section{
-    width: 60%;
+    width: 70%;
     min-height: 400px;
     background-color: rgb(231, 238, 238);
     margin-top: 60px;
@@ -36,9 +36,15 @@
     height: 150px;
     width: 150px;
     border-radius: 5px;
-    margin-left: 40px;
+    margin-left: 10px;
     background-position: center;
     background-size: cover;
     background-color: rgb(42, 56, 56);
 
+}
+.cart-subtitles{
+    display: flex;
+    margin-left: 40px;
+    margin: 10px;
+    justify-content: space-between;
 }

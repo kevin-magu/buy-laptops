@@ -16,6 +16,7 @@ function Checkout() {
   const [addingToCart, setAddingToCart] = useState(false);
   const [currentEmail, setCurrentEmail] = useState('');
   const [itemsInLocalCart, setItemsInLocalCart] = useState([]);
+  const [itemName, setItemName] = useState('')
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -34,7 +35,7 @@ function Checkout() {
           .find(detail => detail.product_id === productId);
 
         if (laptopDetails) {
-          setLaptopDetails(laptopDetails);
+          setLaptopDetails(laptopDetails.laptop_name);
 
         // Fetch images from Firebase Storage
           const email = laptopDetails.email; // Assuming email is used as part of the path
@@ -105,10 +106,12 @@ function Checkout() {
       const userEmail = authInstance.currentUser.email;
       const dbRef = doc(db, "cart", userEmail);
       const itemDetailsCart = collection(dbRef, "items");
+      setItemName(laptopDetails.laptop_name)
       try {
         setAddingToCart(true);
         const uploading = await addDoc(itemDetailsCart, {
           itemId: productId,
+          itemName: itemName, 
           item_price: laptopDetails.laptop_price,
         });
         if (uploading) {
