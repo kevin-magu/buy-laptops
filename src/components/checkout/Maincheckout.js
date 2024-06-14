@@ -19,7 +19,10 @@ function Checkout() {
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const productId = queryParams.get('id').substring(0, 8);
+  const productId = queryParams.get('id');
+  
+  const substringProductId = productId.substring(0, 8)
+  console.log("substring id", substringProductId)
 
   useEffect(() => {
     const fetchLaptopDetails = async () => {
@@ -28,7 +31,7 @@ function Checkout() {
         const querySnapshot = await getDocs(collection(db, "laptop_details"));
         const laptopDetails = querySnapshot.docs
           .map(doc => ({ id: doc.id, ...doc.data() }))
-          .find(detail => detail.product_id.substring(0, 8) === productId);
+          .find(detail => detail.product_id === productId);
 
         if (laptopDetails) {
           setLaptopDetails(laptopDetails);
@@ -38,7 +41,7 @@ function Checkout() {
           const imageRef = ref(storage, `laptop-images/${email}`);
           const imageItems = await listAll(imageRef);
           const imageUrls = await Promise.all(imageItems.items
-            .filter(item => item.name.substring(0, 8) === productId)
+            .filter(item => item.name.substring(0, 8) === substringProductId)
             .map(item => getDownloadURL(item)));
 
           setImages(imageUrls);
