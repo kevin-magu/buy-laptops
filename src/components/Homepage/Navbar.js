@@ -24,7 +24,8 @@ function Navbar(){
         };
     }, [auth]);
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    
     //function to handle logout
     const handleLogout = async () =>{
         try{

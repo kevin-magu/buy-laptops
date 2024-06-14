@@ -5,7 +5,7 @@ import { ref, getDownloadURL, listAll } from 'firebase/storage';
 import { doc, getDocs, collection, addDoc } from 'firebase/firestore';
 import "../../style/ProductDetails.css";
 import { FaShoppingCart } from 'react-icons/fa';
-import { getAuth } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 function Checkout() {
   const [laptopDetails, setLaptopDetails] = useState(null);
@@ -21,30 +21,24 @@ function Checkout() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const productId = queryParams.get('id');
+  const substringProductId = productId.substring(0, 8);
   
-  const substringProductId = productId.substring(0, 8)
-  console.log("substring id", substringProductId)
-
   useEffect(() => {
     const fetchLaptopDetails = async () => {
       try {
-        // Fetch laptop details from Firestore
         const querySnapshot = await getDocs(collection(db, "laptop_details"));
         const laptopDetails = querySnapshot.docs
           .map(doc => ({ id: doc.id, ...doc.data() }))
           .find(detail => detail.product_id === productId);
 
         if (laptopDetails) {
-          setLaptopDetails(laptopDetails.laptop_name);
-
-        // Fetch images from Firebase Storage
-          const email = laptopDetails.email; // Assuming email is used as part of the path
+          setLaptopDetails(laptopDetails);
+          const email = laptopDetails.email;
           const imageRef = ref(storage, `laptop-images/${email}`);
           const imageItems = await listAll(imageRef);
           const imageUrls = await Promise.all(imageItems.items
             .filter(item => item.name.substring(0, 8) === substringProductId)
             .map(item => getDownloadURL(item)));
-
           setImages(imageUrls);
         } else {
           console.error("No such document!");
@@ -61,28 +55,28 @@ function Checkout() {
     }
   }, [productId]);
 
-  // Log the length of itemsInLocalCart whenever it changes
   useEffect(() => {
     console.log("Items in local storage length", itemsInLocalCart.length);
     console.log(itemsInLocalCart);
   }, [itemsInLocalCart]);
 
-  // Function to handle clicking of an image
   const handleImageGalleryClick = (index) => {
     setCurrentIndex(index);
   };
 
-  // Get the current authenticated user
   useEffect(() => {
     const authInstance = getAuth();
-    if (authInstance.currentUser) {
-      setCurrentEmail(authInstance.currentUser.email);
-    } else {
-      console.log("Not logged in");
-    }
+    const unsubscribe = onAuthStateChanged(authInstance, (user) => {
+      if (user) {
+        setCurrentEmail(user.email);
+      } else {
+        console.log("Not logged in");
+      }
+    });
+
+    return () => unsubscribe();
   }, []);
 
-  // Sync itemsInLocalCart with local storage
   useEffect(() => {
     const storedItems = JSON.parse(localStorage.getItem('itemsInLocalCart')) || [];
     setItemsInLocalCart(storedItems);
@@ -92,7 +86,6 @@ function Checkout() {
     localStorage.setItem('itemsInLocalCart', JSON.stringify(itemsInLocalCart));
   }, [itemsInLocalCart]);
 
-  // Function to handle adding items to cart
   const addItemToCart = async () => {
     const authInstance = getAuth();
     if (authInstance.currentUser === null) {
@@ -106,12 +99,11 @@ function Checkout() {
       const userEmail = authInstance.currentUser.email;
       const dbRef = doc(db, "cart", userEmail);
       const itemDetailsCart = collection(dbRef, "items");
-      setItemName(laptopDetails.laptop_name)
+
       try {
         setAddingToCart(true);
         const uploading = await addDoc(itemDetailsCart, {
           itemId: productId,
-          itemName: itemName, 
           item_price: laptopDetails.laptop_price,
         });
         if (uploading) {
