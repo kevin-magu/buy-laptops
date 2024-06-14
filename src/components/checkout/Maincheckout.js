@@ -39,7 +39,11 @@ function Checkout() {
           const imageUrls = await Promise.all(imageItems.items
             .filter(item => item.name.substring(0, 8) === substringProductId)
             .map(item => getDownloadURL(item)));
+            
+            setItemName(laptopDetails.laptop_name)
+            console.log("item name",itemName)
           setImages(imageUrls);
+          
         } else {
           console.error("No such document!");
         }
@@ -102,8 +106,11 @@ function Checkout() {
 
       try {
         setAddingToCart(true);
+        
+        
         const uploading = await addDoc(itemDetailsCart, {
           itemId: productId,
+          item_name: itemName,
           item_price: laptopDetails.laptop_price,
         });
         if (uploading) {

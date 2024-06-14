@@ -12,6 +12,7 @@ function Maincartpage() {
   const [userEmail, setUserEmail] = useState('');
   const [cartItems, setCartItems] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
+  const [quantity, setQuanity] = useState(1)
 
   useEffect(() => {
     const auth = getAuth();
@@ -97,8 +98,9 @@ function Maincartpage() {
           cartItems.map((item, index) => (
             <div key={index} className='item-main-section'>
               <div className='item-image' style={{ backgroundImage: `url(${imageUrls[index] || 'placeholder.jpg'})` }}></div>
-              
-              <div className='item-price'>Price: {item.item_price}</div>
+              <div className="item-name">{item.item_name}</div>
+              <div className="item-quantity"><input type="number" /></div>
+              <div className='item-price'>{item.item_price}</div>
               
             </div>
           ))
