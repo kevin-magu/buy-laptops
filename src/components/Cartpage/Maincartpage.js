@@ -85,6 +85,7 @@ function Maincartpage() {
   return (
     <div className='cart-main-page-wrapper'>
       <h4 className='cart-heading'>Cart</h4>
+      
       <div className='items-main-section'>
         <h3 className='item-category'>Laptops</h3>
         {cartItems.length > 0 ? (
