@@ -34,14 +34,13 @@
     display: flex;
 }
 .item-image{
-    height: 150px;
-    width: 150px;
+    height: 160px;
+    width: 160px;
     border-radius: 5px;
     margin-left: 10px;
     background-position: center;
     background-size: cover;
     background-color: rgb(42, 56, 56);
-
 }
 .cart-subtitles{
     display: flex;
@@ -77,4 +76,7 @@
 .item-name{
     margin-left: 10px;
     font-weight: bold;
+}
+.image-and-delete{
+    position: absolute;
 }

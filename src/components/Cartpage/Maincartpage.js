@@ -3,6 +3,7 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { db, storage } from '../../Firebaseconfig';
 import { collection, getDocs } from 'firebase/firestore';
 import { getDownloadURL, listAll, ref } from 'firebase/storage';
+import { FaTrash } from 'react-icons/fa';
 
 function Maincartpage() {
   const [user, setUser] = useState(null);
@@ -108,7 +109,12 @@ function Maincartpage() {
           cartItems.map((item, index) => (
             <div>
             <div key={item.itemId} className='item-main-section'>
-              <div className='item-image' style={{ backgroundImage: `url(${imageUrls[index] || 'placeholder.jpg'})` }}></div>
+              
+              <div className='item-image' style={{ backgroundImage: `url(${imageUrls[index] || 'placeholder.jpg'})` }}>
+              <FaTrash className='delte'/>
+              </div>
+              
+              
               <div className="item-name">{item.item_name}</div>
               <div className="item-quantity">
                 <input
