@@ -86,16 +86,82 @@
     position: absolute;
     right: -25px;
     color: red;
+    cursor: pointer;
 }
 .cart-total-card{
     background-color: rgb(42, 56, 56);
     width: 370px;
-    height: 300px;
+    height: 370px;
     margin-top: 60px;
     margin-left: 20px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: right;
     color: white;
+    position: relative;
+}
+.card-align{
+    margin-left: 40px;
+}
+.cart-total-price{
+    font-size: 23px;
+    margin-top: 30px;
+}
+.total-cart-items{
+    font-size: 20px;
+    margin-top: 20px;
+}
+.coupon-button{
+    background-color: white;
+    height: 30px;
+    width: 180px;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin-top: 30px;
+    font-weight: bold;
+}
+.payment-buttons{
+    margin-top: 20px;
+    width: 80%;
+    height: 35px;
+    font-size: 19px;
+}
+.mpesa-button{
+    color: darkgreen;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+.mpesa-phone-icon{
+    height: 30px;
+    width: 30px;
+    background: url(../images/mpesa-phone-icon.png);
+    background-position: center;
+    background-size: cover;
+}
+.paypal-button{
+    font-weight: bold;
+}
+
+
+.paypal-logo{
+    color: #24A0DF;
+}
+.paypal-context{
+    color: #132F6E;
+}
+.credit-card-button{
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+}
+.credit-card-icon{
+    
 }

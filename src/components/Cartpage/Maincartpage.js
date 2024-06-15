@@ -4,6 +4,8 @@ import { db, storage } from '../../Firebaseconfig';
 import { collection, getDocs } from 'firebase/firestore';
 import { getDownloadURL, listAll, ref } from 'firebase/storage';
 import { FaTrash } from 'react-icons/fa';
+import { FaPaypal } from 'react-icons/fa';
+import { FaCreditCard } from 'react-icons/fa';
 
 function Maincartpage() {
   const [user, setUser] = useState(null);
@@ -12,6 +14,8 @@ function Maincartpage() {
   const [cartItems, setCartItems] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
   const [quantities, setQuantities] = useState({});
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
 
   useEffect(() => {
     const auth = getAuth();
@@ -66,10 +70,20 @@ function Maincartpage() {
           setImageUrls(newImageUrls);
 
           const initialQuantities = {};
+          let initialTotalItems = 0;
           itemsList.forEach(item => {
             initialQuantities[item.itemId] = item.quantity || 1;
+            initialTotalItems += item.quantity || 1;
           });
           setQuantities(initialQuantities);
+          setTotalItems(initialTotalItems);
+
+          // Calculate initial total price
+          let initialTotalPrice = 0;
+          itemsList.forEach(item => {
+            initialTotalPrice += parsePrice(item.item_price) * (item.quantity || 1);
+          });
+          setTotalPrice(initialTotalPrice);
         }
       } catch (error) {
         console.error('Error fetching cart items:', error);
@@ -81,19 +95,32 @@ function Maincartpage() {
   }, [userEmail]);
 
   const handleQuantityChange = (itemId, value) => {
-    setQuantities(prevQuantities => ({
-      ...prevQuantities,
-      [itemId]: value
-    }));
+    setQuantities(prevQuantities => {
+      const newQuantities = { ...prevQuantities, [itemId]: value };
+      updateTotalPriceAndItems(newQuantities);
+      return newQuantities;
+    });
+  };
+
+  const updateTotalPriceAndItems = (newQuantities) => {
+    let newTotalPrice = 0;
+    let newTotalItems = 0;
+    cartItems.forEach(item => {
+      const quantity = newQuantities[item.itemId] || 1;
+      newTotalPrice += parsePrice(item.item_price) * quantity;
+      newTotalItems += quantity;
+    });
+    setTotalPrice(newTotalPrice);
+    setTotalItems(newTotalItems);
+  };
+
+  const parsePrice = (price) => {
+    return parseFloat(price.replace(/,/g, ''));
   };
 
   if (loading) {
     return <div>Loading...</div>;
   }
-
-  const parsePrice = (price) => {
-    return parseFloat(price.replace(/,/g, ''));
-  };
 
   return (
     <div className='cart-main-page-wrapper'>
@@ -107,13 +134,10 @@ function Maincartpage() {
         
         {cartItems.length > 0 ? (
           cartItems.map((item, index) => (
-            <div>
-            <div key={item.itemId} className='item-main-section'>        
+            <div key={item.itemId} className='item-main-section'>
               <div className='item-image' style={{ backgroundImage: `url(${imageUrls[index] || 'placeholder.jpg'})` }}>
-              <FaTrash className='cart-delete-icon' title="delete icon"/>
+                <div title='Remove from cart'><FaTrash className='cart-delete-icon' title="delete icon"/></div>
               </div>
-              
-              
               <div className="item-name">{item.item_name}</div>
               <div className="item-quantity">
                 <input
@@ -124,17 +148,25 @@ function Maincartpage() {
               </div>
               <div className='item-price'>{(parsePrice(item.item_price) * (quantities[item.itemId] || 1)).toFixed(2)}</div>
             </div>
-            </div> 
           ))
         ) : (
           <div>No items in cart</div>
         )}
-          
- 
-          
       </div>
       <div className="cart-total-card">
-        <h4>Total cart items {}</h4>
+        <div className='card-align'> 
+        <h4 className='total-cart-items'>Total Items: {totalItems}</h4>
+        <button className='coupon-button'>Add coupon code  +</button>
+        <h4 className='cart-total-price'>Total Cart Price: {totalPrice.toFixed(2)}</h4>
+        <button className='payment-buttons mpesa-button'>
+          <p> M-</p>
+          <div className='mpesa-phone-icon'></div>
+          <p>pesa</p>
+        </button>
+
+        <button className='payment-buttons paypal-button'> <FaPaypal className='paypal-logo' /> <span className='paypal-context'>Paypal</span> </button>
+        <button className='payment-buttons credit-card-button'><FaCreditCard className='credit-card-icon'/> <span>Debit or Credit card</span></button>
+        </div>
       </div>
     </div>
   );
