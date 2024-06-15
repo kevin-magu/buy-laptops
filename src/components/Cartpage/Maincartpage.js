@@ -108,10 +108,9 @@ function Maincartpage() {
         {cartItems.length > 0 ? (
           cartItems.map((item, index) => (
             <div>
-            <div key={item.itemId} className='item-main-section'>
-              
+            <div key={item.itemId} className='item-main-section'>        
               <div className='item-image' style={{ backgroundImage: `url(${imageUrls[index] || 'placeholder.jpg'})` }}>
-              <FaTrash className='delte'/>
+              <FaTrash className='cart-delete-icon' title="delete icon"/>
               </div>
               
               
@@ -125,20 +124,17 @@ function Maincartpage() {
               </div>
               <div className='item-price'>{(parsePrice(item.item_price) * (quantities[item.itemId] || 1)).toFixed(2)}</div>
             </div>
-
-              <div className="">
-
-              </div>
-
-
-            </div>
-            
-
-            
+            </div> 
           ))
         ) : (
           <div>No items in cart</div>
         )}
+          
+ 
+          
+      </div>
+      <div className="cart-total-card">
+        <h4>Total cart items {}</h4>
       </div>
     </div>
   );
